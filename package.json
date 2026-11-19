@@ -1,0 +1,18 @@
+{
+  "name": "mgr-life-local",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local MGR LIFE STYLE website, backend, and desktop accounts app",
+  "main": "desktop/main.cjs",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "desktop": "electron .",
+    "desktop:build": "node desktop/build.cjs"
+  },
+  "devDependencies": {
+    "electron": "^37.2.0"
+  }
+}

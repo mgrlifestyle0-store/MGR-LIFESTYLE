@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>MGR LIFE STYLE — Store</title>
+<style>
+:root{--bg:#ffffff;--surface:#fbfaf7;--surface-2:#f3f0e7;--champ:#b8924f;--champ-onlight:#8a6a1f;--champ-ondark:#e7d5ab;--champ-deep:#6e551a;--ink:#1c1b18;--muted:#7d7869;--line:rgba(0,0,0,.1);--ok:#3d8a5e;--danger:#a3332e}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit}button{cursor:pointer}
+.top{background:var(--surface-2);color:var(--champ-onlight);padding:9px 5%;font-size:11.5px;letter-spacing:.08em;display:flex;justify-content:space-between;border-bottom:1px solid var(--line)}
+.header{background:#fff;padding:18px 5%;display:flex;align-items:center;gap:25px;border-bottom:1px solid var(--line)}
+.logo{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:24px;white-space:nowrap;color:var(--ink);letter-spacing:.04em;display:flex;align-items:center;gap:11px}
+.logo .crest{width:32px;height:32px;border-radius:50%;border:1px solid var(--champ);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--champ-onlight)}
+.logo span{color:var(--champ-onlight);font-style:italic}.tag{font-size:9.5px;color:var(--muted);font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
+.search{display:flex;flex:1;max-width:650px}.search input{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:2px 0 0 2px;background:var(--surface);color:var(--ink)}.search input::placeholder{color:var(--muted)}.search input:focus{outline:none;border-color:var(--champ)}.search button{width:52px;border:1px solid var(--champ);border-left:0;background:transparent;border-radius:0 2px 2px 0;color:var(--champ-onlight);font-weight:700}
+.actions{display:flex;gap:16px;font-size:13.5px;white-space:nowrap}.actions button{border:0;background:none;color:var(--ink);font-weight:400;letter-spacing:.02em}.actions b{color:var(--champ-onlight)}
+.nav{background:#fff;color:var(--ink);padding:12px 5%;display:flex;gap:28px;align-items:center;border-bottom:1px solid var(--line)}
+.nav button{background:none;border:0;color:var(--ink);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 0;border-bottom:1px solid transparent}.nav button:hover{color:var(--champ-onlight);border-bottom-color:var(--champ)}
+.hero{margin:1px auto 18px;max-width:1250px;overflow:hidden;background:linear-gradient(160deg,#000,#141416 70%);color:#fff;padding:80px 7%;min-height:320px;position:relative;border:1px solid var(--line)}
+.hero:after{content:"";position:absolute;right:6%;top:50%;transform:translateY(-50%);width:210px;height:210px;border-radius:50%;border:1px solid rgba(231,213,171,.3)}
+.hero:before{content:"";position:absolute;right:calc(6% + 40px);top:50%;transform:translateY(-50%);width:130px;height:130px;border-radius:50%;border:1px solid rgba(231,213,171,.18)}
+.hero>*{position:relative;z-index:1}.eyebrow{display:inline-block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--champ-ondark);border-bottom:1px solid var(--champ);padding-bottom:6px;margin-bottom:22px}
+.hero h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:48px;line-height:1.12;margin:0 0 16px;max-width:600px;letter-spacing:.01em}
+.gold{color:var(--champ-ondark);font-style:italic}
+.hero p{font-size:15.5px;color:#a9a59a;max-width:440px;letter-spacing:.02em}
+.primary{background:var(--champ-ondark);border:1px solid var(--champ-ondark);color:#0a0a0b;padding:13px 26px;border-radius:2px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:12.5px}
+.primary:hover{background:transparent;color:var(--champ)}
+.container{max-width:1250px;margin:auto;padding:0 18px}
+.trustline{background:#000;color:var(--champ-ondark);text-align:center;padding:11px 5%;font-size:12px;letter-spacing:.03em}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border:1px solid var(--line);margin:18px 0;padding:26px 10px;gap:8px}
+.trust div{text-align:center;position:relative}.trust div:not(:last-child):after{content:"";position:absolute;right:0;top:15%;height:70%;width:1px;background:var(--line)}
+.trust span{display:inline-flex;width:38px;height:38px;border-radius:50%;align-items:center;justify-content:center;border:1px solid var(--champ);font-size:16px;margin-bottom:10px;color:var(--champ-onlight)}
+.trust b{display:block;font-family:Georgia,serif;font-weight:400;font-size:14px;color:var(--ink);letter-spacing:.02em}.trust small{color:var(--muted);font-size:11.5px;letter-spacing:.02em}
+h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:26px;color:var(--ink);letter-spacing:.01em}
+.categories{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:50%;aspect-ratio:1;padding:18px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:border-color .15s}
+.cat:hover{border-color:var(--champ)}
+.cat .icon{font-size:28px;filter:grayscale(.15)}.cat small{margin-top:7px;color:var(--ink);font-weight:400;font-size:12px;letter-spacing:.02em}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.sectionhead button{border:0;background:none;color:var(--champ-onlight);font-weight:400;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:20px}
+.side,.product,.card{background:var(--surface);border:1px solid var(--line);border-radius:2px}
+.side{padding:18px}.side b{font-family:Georgia,serif;color:var(--ink);font-weight:400;letter-spacing:.03em}.side label{display:block;padding:8px 0;font-size:13.5px;color:var(--muted)}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.product{padding:12px;position:relative;transition:border-color .15s,transform .15s}
+.product:hover{border-color:var(--champ);transform:translateY(-2px)}
+.pic{height:185px;border-radius:2px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:68px;border:1px solid var(--line)}
+.badge{position:absolute;top:20px;left:20px;background:#000;border:1px solid var(--champ);color:var(--champ-ondark);border-radius:2px;padding:4px 8px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:400}
+.product h3{font-family:Georgia,serif;font-weight:400;font-size:15px;margin:12px 0 6px;color:var(--ink);letter-spacing:.01em}
+.stars{color:var(--champ);font-size:13px}
+.price{font-size:18px;font-weight:400;margin:7px 0;color:var(--champ-onlight);font-family:Georgia,serif}
+.old{text-decoration:line-through;color:var(--muted);font-size:12px;font-weight:400}
+.add{width:100%;background:transparent;border:1px solid var(--champ);padding:10px;border-radius:2px;font-weight:600;color:var(--champ-onlight);letter-spacing:.05em;text-transform:uppercase;font-size:12px}
+.add:hover{background:var(--champ);color:#0a0a0b}
+.banner{margin:32px 0;background:#000;color:#fff;padding:36px;border-radius:2px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--champ)}
+.banner h2{margin:0;color:#fff}.banner p{color:var(--champ-ondark);margin:4px 0 0;letter-spacing:.03em}
+.footer{background:#000;color:#fff;margin-top:44px;padding:48px 5% 30px;border-top:1px solid var(--line)}
+.footergrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+.footer h2{color:#fff;font-weight:400}.footer a{display:block;color:#a9a59a;margin:9px 0;text-decoration:none;font-size:13.5px}.footer a:hover{color:var(--champ-ondark)}
+.footer b{color:var(--champ-ondark);font-family:Georgia,serif;font-weight:400;letter-spacing:.06em;text-transform:uppercase;font-size:12.5px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:20}
+.modal.open{display:flex}
+.modalbox{background:var(--surface);width:min(900px,94%);max-height:90vh;overflow:auto;border-radius:2px;padding:24px;border:1px solid var(--line);color:var(--ink)}
+.modalbox h2{color:var(--ink)}
+.close{float:right;border:0;background:none;font-size:25px;color:var(--muted)}
+.cartrow{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:12px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{background:var(--surface-2);padding:16px;border-radius:2px;border:1px solid var(--line)}
+.stat h2{color:var(--champ-onlight);font-size:21px;margin:6px 0 0}
+.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.formgrid input,.formgrid select,.fullinput{width:100%;padding:10px;border:1px solid var(--line);border-radius:2px;background:var(--surface-2);color:var(--ink)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.tab{border:1px solid var(--line);background:transparent;padding:9px 13px;border-radius:2px;font-size:12.5px;font-weight:400;letter-spacing:.03em;color:var(--ink)}
+.tab.active{background:var(--champ-ondark);color:#0a0a0b;border-color:var(--champ-ondark)}
+.pill{display:inline-block;padding:4px 9px;border-radius:2px;background:transparent;border:1px solid var(--champ);color:var(--champ-onlight);font-size:11.5px;font-weight:400;letter-spacing:.03em}
+.ok{color:var(--ok);font-weight:700}.bad{color:var(--danger);font-weight:700}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.mini{font-size:12px;color:var(--muted)}
+.notice{padding:12px 14px;background:var(--surface-2);border:1px solid var(--champ);border-radius:2px;margin:10px 0;font-size:13px;color:var(--ink)}
+@media(max-width:850px){.top{font-size:11px}.header{flex-wrap:wrap;gap:10px}.search{order:3;flex-basis:100%;max-width:none}.actions{font-size:12px}.nav{overflow:auto;gap:16px}.hero{margin:8px;min-height:300px;padding:40px 25px}.hero h1{font-size:38px}.trust{grid-template-columns:repeat(2,1fr);gap:15px}.trust div:nth-child(2):after{display:none}.categories{grid-template-columns:repeat(4,1fr)}.layout{grid-template-columns:1fr}.side{display:none}.products{grid-template-columns:repeat(2,1fr)}.pic{height:145px;font-size:55px}.footergrid{grid-template-columns:1fr 1fr}.banner{display:block}.hero:after,.hero:before{display:none}.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.top{display:none}.logo{font-size:19px}.actions{gap:6px}.hero h1{font-size:31px}.hero p{font-size:14px}.categories{gap:8px}.cat{padding:8px}.cat .icon{font-size:23px}.cat small{font-size:10px}.products{gap:8px}.product{padding:8px}.pic{height:125px}.footergrid{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.modalbox{padding:15px}.trustline{font-size:10.5px;line-height:1.7;white-space:normal}}
+@media print{body *{visibility:hidden}#printArea,#printArea *{visibility:visible}#printArea{position:absolute;top:0;left:0;width:100%;padding:20px;color:#000}#printArea table{width:100%;border-collapse:collapse}#printArea td,#printArea th{border-bottom:1px solid #ccc;padding:6px;text-align:left}}
+</style>
+</head>
+<body>
+<div class="top"><span>✈ Global Quality • Better Lifestyle • A Brighter Tomorrow</span><span id="backendStatus">Connecting to local PC backend…</span></div>
+<header class="header">
+<div class="logo"><span class="crest">♕</span>MGR <span>LIFE STYLE</span><div class="tag">Better Life • Better You</div></div>
+<div class="search"><input id="search" placeholder="Search products, brands..." oninput="renderProducts()"><button onclick="renderProducts()">⌕</button></div>
+<div class="actions"><button onclick="openCustomerLogin()">👤 Login</button><button onclick="openWishlist()">♡ Wishlist <b id="wishCount">0</b></button><button onclick="openCart()">🛒 Cart <b id="count">0</b></button></div>
+</header>
+<nav class="nav"><button onclick="home()">⌂ Home</button><button onclick="openCategoriesMenu()">Categories ▾</button><button onclick="scrollToProducts()">New Arrivals</button><button onclick="scrollToProducts()">Offers</button><button onclick="showInfo('About MGR LIFE STYLE','Premium products for a better lifestyle.')">About Us</button><button onclick="showInfo('Contact','Support: 7624006324<br>Email: MGRLIFESTLYE0@gmail.com')">Contact</button></nav>
+
+<main class="container">
+<section class="hero"><span class="eyebrow">Est. Trusted Quality</span><h1>Premium Quality<br><span class="gold">Global Lifestyle</span></h1><p>Luxury • Lifestyle • Everyday Essentials</p><button class="primary" onclick="scrollToProducts()">Shop Now →</button></section>
+
+<section id="productsSection"><div class="sectionhead"><h2>Featured Products</h2><button onclick="filterCat('All')">View All →</button></div>
+<div class="layout"><aside class="side"><b>Shop Filters</b><div id="filterCats"></div><hr><b>Sort</b><select id="sort" onchange="renderProducts()" style="width:100%;padding:8px;margin-top:8px"><option value="">Featured</option><option value="low">Price Low → High</option><option value="high">Price High → Low</option></select></aside>
+<div id="products" class="products"></div></div></section>
+<div class="banner"><div><h2>Special Offers</h2><p>Up to 50% OFF • Limited Time Only</p></div><button class="primary" onclick="scrollToProducts()">Shop Offers</button></div>
+</main>
+<div class="trustline">🛡️ Genuine Products &nbsp;|&nbsp; 🚚 Global Shipping &nbsp;|&nbsp; 🔒 Secure Payment &nbsp;|&nbsp; ☎ 24/7 Support · 7624006324</div>
+<footer class="footer"><div class="footergrid"><div><h2>MGR LIFE STYLE</h2><p id="partnerTap" onclick="partnerSecretTap()" style="cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;display:inline-block;padding:4px 0">Premium products for a better lifestyle.</p><p class="mini" id="syncTap" onclick="syncSecretTap()" style="cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;display:inline-block;padding:4px 0">India + USA + UK + UAE + Canada + Australia + Worldwide</p></div><div><div id="footerCats"></div></div><div><b>Customer Care</b><a onclick="showInfo('Shipping','Worldwide shipping enabled in the configuration. Free shipping above ₹999 in the current demo.')">Shipping</a><a onclick="showInfo('Returns','Return/refund workflow is demo-only in offline mode.')">Returns</a><a onclick="openCustomerLogin()">My Account</a></div><div><b>Contact</b><a onclick="showInfo('Contact','7624006324<br>MGRLIFESTLYE0@gmail.com')">7624006324</a></div></div></footer>
+
+<div id="modal" class="modal"><div class="modalbox"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+<div id="printArea"></div>
+
+<script>
+
+const defaultCats=[
+{c:'Home Cleaning Products',icon:'🧽',label:'Home Cleaning'},
+{c:'Clothes',icon:'👕',label:'Clothes'},
+{c:'Perfume',icon:'🧴',label:'Perfume'},
+{c:'Candles',icon:'🕯️',label:'Candles'},
+{c:'Jewellery',icon:'💎',label:'Jewellery'},
+{c:'Cosmetics',icon:'💄',label:'Cosmetics'},
+{c:'Home Care',icon:'🏠',label:'Home Care'},
+{c:'Wellness',icon:'🌿',label:'Wellness'},
+{c:'Electronics',icon:'🎧',label:'Electronics'}
+];
+let CATS=JSON.parse(localStorage.getItem('mgr_offline_categories')||'null')||defaultCats;
+function saveCats(){localStorage.setItem('mgr_offline_categories',JSON.stringify(CATS))}
+let SUBS=JSON.parse(localStorage.getItem('mgr_offline_subcats')||'null')||[];
+function saveSubs(){localStorage.setItem('mgr_offline_subcats',JSON.stringify(SUBS))}
+function allSubsFor(cat){const fromSubs=SUBS.filter(s=>s.cat===cat).map(s=>s.sub);const fromProducts=products.filter(p=>p.c===cat&&p.sub).map(p=>p.sub);return [...new Set([...fromSubs,...fromProducts])]}
+function renderCategoryUI(){
+ document.getElementById('filterCats').innerHTML=CATS.map(x=>`<label><input type="checkbox" onchange="filterCat('${x.c}')"> ${x.label}</label>`).join('');
+ document.getElementById('footerCats').innerHTML=CATS.map(x=>`<a onclick="filterCat('${x.c}')">${x.label}</a>`).join('');
+}
+function openCategoriesMenu(){renderCategoriesModal(null,null)}
+function renderCategoriesModal(openCat,openSub){
+ const counts=CATS.map(x=>({...x,items:products.filter(p=>p.c===x.c)}));
+ function subGroups(items){
+  const map={};items.forEach(p=>{const key=p.sub||'';if(!map[key])map[key]=[];map[key].push(p)});
+  return map;
+ }
+ openModal(`<h2>Shop by Category</h2><div class="row"><span>All Categories</span><button class="primary" onclick="filterCat('All');closeModal()">View All</button></div>${counts.map(x=>{
+  const isOpen=x.c===openCat;
+  const groups=subGroups(x.items);
+  const declaredSubs=allSubsFor(x.c);
+  declaredSubs.forEach(sn=>{if(!groups[sn])groups[sn]=[]});
+  const subNames=Object.keys(groups).filter(k=>k!=='');
+  const plainItems=groups['']||[];
+  let inner='';
+  if(isOpen){
+   if(!x.items.length&&!subNames.length){
+    inner=`<p class="mini" style="padding:0 0 12px 30px">No items added yet.</p>`;
+   } else {
+    inner=`<div style="padding:2px 0 12px 22px">`;
+    inner+=subNames.map(sn=>{
+     const subOpen=sn===openSub;
+     const list=groups[sn];
+     return `<div style="border-bottom:1px solid var(--line)"><div class="row" style="cursor:pointer;border:0;padding:8px 0" onclick="event.stopPropagation();renderCategoriesModal('${x.c}',${subOpen?'null':`'${sn}'`})"><span>📂 ${sn} <span class="mini">(${list.length}) ${subOpen?'▲':'▼'}</span></span></div>${subOpen?(list.length?`<div style="padding:0 0 10px 20px">${list.map(p=>`<div class="row" style="border:0;padding:5px 0"><span>${p.e} ${p.n}</span><span class="mini">${money(p.p)}</span></div>`).join('')}</div>`:'<p class="mini" style="padding:0 0 10px 20px">No items added yet.</p>'):''}</div>`;
+    }).join('');
+    if(plainItems.length){
+     inner+=plainItems.map(p=>`<div class="row" style="border:0;padding:6px 0"><span>${p.e} ${p.n}</span><span class="mini">${money(p.p)}</span></div>`).join('');
+    }
+    inner+=`</div>`;
+   }
+  }
+  return `<div style="border-bottom:1px solid var(--line)"><div class="row" style="cursor:pointer;border:0" onclick="renderCategoriesModal(${isOpen?'null':`'${x.c}'`},null)"><span>${x.icon} ${x.label} <span class="mini">(${x.items.length} items) ${isOpen?'▲':'▼'}</span></span><button class="primary" onclick="event.stopPropagation();filterCat('${x.c}');closeModal()">Shop</button></div>${inner}</div>`;
+ }).join('')}`);
+}
+const defaultProducts=[
+{id:101,n:'Detergent Liquid 500gm',c:'Home Cleaning Products',sub:'Detergent Liquid',p:0,cost:0,e:'🧴',r:5,stock:20},
+{id:102,n:'Dish Wash Liquid 500gm',c:'Home Cleaning Products',sub:'Dish Wash Liquid',p:0,cost:0,e:'🧴',r:5,stock:20},
+{id:103,n:'Hand Wash Liquid 500gm',c:'Home Cleaning Products',sub:'Hand Wash Liquid',p:0,cost:0,e:'🧼',r:5,stock:20},
+{id:104,n:'Car Wash Liquid 500gm',c:'Home Cleaning Products',sub:'Car Wash Liquid',p:0,cost:0,e:'🚗',r:5,stock:20},
+{id:105,n:'Bathroom Cleaning 500gm',c:'Home Cleaning Products',sub:'Bathroom Cleaning',p:0,cost:0,e:'🚿',r:5,stock:20},
+{id:106,n:'Toilet Cleaner Liquid 500gm',c:'Home Cleaning Products',sub:'Toilet Cleaner Liquid',p:0,cost:0,e:'🚽',r:5,stock:20},
+{id:107,n:'Glass Cleaner Liquid 500gm',c:'Home Cleaning Products',sub:'Glass Cleaner Liquid',p:0,cost:0,e:'🪟',r:5,stock:20},
+{id:108,n:'Floor Cleaner Liquid 500gm',c:'Home Cleaning Products',sub:'Floor Cleaner Liquid',p:0,cost:0,e:'🧹',r:5,stock:20},
+{id:109,n:'Phynole Liquid 500gm/1 Liter',c:'Home Cleaning Products',sub:'Phynole Liquid',p:0,cost:0,e:'🧴',r:5,stock:20},
+{id:1,n:'Premium Detergent Powder 1kg',c:'Home Cleaning Products',sub:'Detergent Powder',p:199,cost:120,e:'🧴',r:4.8,stock:50},
+{id:2,n:'Quality Cotton Shirt',c:'Clothes',p:499,cost:280,e:'👕',r:4.7,stock:30},
+{id:3,n:'Luxury Perfume 100ml',c:'Perfume',p:899,cost:500,e:'🧴',r:4.9,stock:20},
+{id:4,n:'24K Gold Plated Necklace',c:'Jewellery',p:1299,cost:700,e:'💎',r:4.7,stock:15},
+{id:5,n:'Beauty Cosmetics Kit',c:'Cosmetics',p:699,cost:360,e:'💄',r:4.8,stock:25},
+{id:6,n:'Premium Home Care Set',c:'Home Care',p:599,cost:300,e:'🏠',r:4.6,stock:18},
+{id:7,n:'Wellness Essentials',c:'Wellness',p:799,cost:420,e:'🌿',r:4.7,stock:22},
+{id:8,n:'Wireless Lifestyle Headphones',c:'Electronics',p:1599,cost:900,e:'🎧',r:4.6,stock:12}
+];
+let products=JSON.parse(localStorage.getItem('mgr_offline_products')||'null')||defaultProducts;
+let cart=JSON.parse(localStorage.getItem('mgr_offline_cart')||'[]');
+let wishlist=JSON.parse(localStorage.getItem('mgr_offline_wishlist')||'[]');
+let partners=JSON.parse(localStorage.getItem('mgr_offline_partners')||'null')||[
+{name:'Karan',share:40,paid:0},{name:'Reena',share:30,paid:0},{name:'Partner 3',share:30,paid:0}
+];
+let orders=JSON.parse(localStorage.getItem('mgr_offline_orders')||'[]');
+let expenses=JSON.parse(localStorage.getItem('mgr_offline_expenses')||'[]');
+let customers=JSON.parse(localStorage.getItem('mgr_offline_customers')||'[]');
+let active='All';
+
+function save(){localStorage.setItem('mgr_offline_products',JSON.stringify(products));localStorage.setItem('mgr_offline_cart',JSON.stringify(cart));localStorage.setItem('mgr_offline_wishlist',JSON.stringify(wishlist));localStorage.setItem('mgr_offline_partners',JSON.stringify(partners));localStorage.setItem('mgr_offline_orders',JSON.stringify(orders));localStorage.setItem('mgr_offline_expenses',JSON.stringify(expenses));localStorage.setItem('mgr_offline_customers',JSON.stringify(customers));}
+async function storeApi(path,options={}){const headers={'Content-Type':'application/json'};if(options.token)headers.Authorization='Bearer '+options.token;const response=await fetch(path,{method:options.method||'GET',headers,body:options.body?JSON.stringify(options.body):undefined});const result=await response.json().catch(()=>({error:'Invalid response from local backend'}));if(!response.ok)throw new Error(result.error||'Local backend request failed');return result}
+function customerToken(){return sessionStorage.getItem('mgr_customer_token')}
+function setCustomerSession(result){sessionStorage.setItem('mgr_customer_token',result.token);sessionStorage.setItem('mgr_customer_profile',JSON.stringify(result.user))}
+function customerProfile(){try{return JSON.parse(sessionStorage.getItem('mgr_customer_profile')||'null')}catch{return null}}
+function money(x){return '₹'+Number(x||0).toLocaleString('en-IN')}
+function renderProducts(){
+ const q=document.getElementById('search').value.toLowerCase();
+ let list=products.filter(x=>(active==='All'||x.c===active)&&x.n.toLowerCase().includes(q));
+ const s=document.getElementById('sort').value;if(s==='low')list.sort((a,b)=>a.p-b.p);if(s==='high')list.sort((a,b)=>b.p-a.p);
+ document.getElementById('products').innerHTML=list.map(p=>`<article class="product"><span class="badge">${p.stock>0?'SALE':'OUT'}</span><div class="pic">${p.e}</div><h3>${p.n}</h3><div class="stars">★★★★★ <span style="color:#777">(${p.r})</span></div><div class="price">${money(p.p)} <span class="old">${money(p.p+50)}</span></div><div class="mini">Stock: ${p.stock}</div><button class="add" ${p.stock<1?'disabled':''} onclick="add(${p.id})">🛒 Add to Cart</button><button style="width:100%;margin-top:6px;padding:8px;border:1px solid #ddd;background:#fff;border-radius:6px" onclick="toggleWish(${p.id})">${wishlist.includes(p.id)?'♥ Saved':'♡ Wishlist'}</button></article>`).join('')||'<div class="card">No products found.</div>';
+ document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);document.getElementById('wishCount').textContent=wishlist.length;
+}
+function filterCat(c){active=c;renderProducts();scrollToProducts()}function scrollToProducts(){document.getElementById('productsSection').scrollIntoView({behavior:'smooth'})}function home(){window.scrollTo({top:0,behavior:'smooth'})}
+function add(id){const p=products.find(x=>x.id===id);if(!p||p.stock<1)return alert('Product out of stock');const item=cart.find(x=>x.id===id);if(item){if(item.qty>=p.stock)return alert('Stock limit reached');item.qty++}else cart.push({id,qty:1});save();renderProducts()}
+function toggleWish(id){wishlist=wishlist.includes(id)?wishlist.filter(x=>x!==id):[...wishlist,id];save();renderProducts()}
+function openWishlist(){const items=wishlist.map(id=>products.find(p=>p.id===id)).filter(Boolean);openModal(`<h2>Wishlist</h2>${items.length?items.map(p=>`<div class="row"><span>${p.e} ${p.n}</span><button class="primary" onclick="add(${p.id});openWishlist()">Add to Cart</button></div>`).join(''):'<p>Your wishlist is empty.</p>'}`)}
+function openCart(){let total=0;const rows=cart.map((x,i)=>{const p=products.find(y=>y.id===x.id);if(!p)return '';total+=p.p*x.qty;return `<div class="cartrow"><span>${p.e} ${p.n}<br><span class="mini">${money(p.p)} × ${x.qty}</span></span><span><button onclick="changeQty(${i},-1)">−</button> <b>${x.qty}</b> <button onclick="changeQty(${i},1)">+</button> <button onclick="removeCart(${i})">×</button></span></div>`}).join('');openModal(`<h2>Your Cart</h2>${rows||'<p>Your cart is empty.</p>'}<h3>Total: ${money(total)}</h3><div class="notice">Free shipping above ₹999 • COD: No • Worldwide shipping: Yes</div><button class="primary" onclick="checkout()">Proceed to Checkout</button>`)}
+function changeQty(i,d){const item=cart[i],p=products.find(x=>x.id===item.id);item.qty+=d;if(item.qty<=0)cart.splice(i,1);else if(item.qty>p.stock)item.qty=p.stock;save();openCart();renderProducts()}
+function removeCart(i){cart.splice(i,1);save();openCart();renderProducts()}
+function checkout(){if(!cart.length)return alert('Cart is empty');if(!customerToken()){openCustomerLogin();return alert('Please log in or create a customer account before checkout')}openModal(`<h2>Shipping Details</h2><label class="mini">Phone<input id="orderPhone" class="fullinput" type="tel" autocomplete="tel"></label><label class="mini">Full address<textarea id="orderAddress" class="fullinput" rows="3" autocomplete="street-address"></textarea></label><button class="primary" onclick="placeOrder()">Place Order</button><p class="mini">The order and stock update will be saved in the local backend.</p>`)}
+async function placeOrder(){const token=customerToken(),phone=document.getElementById('orderPhone').value,address=document.getElementById('orderAddress').value;try{const order=await storeApi('/api/orders',{method:'POST',token,body:{items:cart.map(item=>({id:item.id,qty:item.qty})),phone,address}});orders.unshift(order);cart=[];save();await reloadCatalog();openModal(`<h2>Order Created</h2><p>Order <b>#${order.id}</b> saved successfully.</p><p>Total: <b>${money(order.total)}</b></p><p>Status: <span class="pill">${order.status}</span></p><div class="notice">Payment gateway is not connected; this order is pending payment.</div>`)}catch(error){alert(error.message)}}
+function openCustomerLogin(){if(customerToken()){showCustomerAccount();return}openCustomerLoginForm('login')}
+function openCustomerLoginForm(mode){const signup=mode==='signup';openModal(`<h2>${signup?'Create Customer Account':'Customer Login'}</h2>${signup?'<label class="mini">Name<input id="customerName" class="fullinput" autocomplete="name"></label>':''}<label class="mini">Email<input id="cu" class="fullinput" type="email" autocomplete="email"></label><label class="mini">Password<input id="cp" class="fullinput" type="password" autocomplete="${signup?'new-password':'current-password'}"></label><button class="primary" onclick="${signup?'customerSignup()':'customerLogin()'}">${signup?'Create Account':'Login'}</button><button class="tab" onclick="openCustomerLoginForm('${signup?'login':'signup'}')">${signup?'Already have an account? Login':'Create Account'}</button><p class="mini">Accounts are saved in the local backend on this PC. Use at least 8 characters for the password.</p>`)}
+async function customerLogin(){try{const result=await storeApi('/api/auth/login',{method:'POST',body:{username:document.getElementById('cu').value,password:document.getElementById('cp').value,role:'customer'}});setCustomerSession(result);showCustomerAccount()}catch(error){alert(error.message)}}
+async function customerSignup(){try{const result=await storeApi('/api/customer/signup',{method:'POST',body:{name:document.getElementById('customerName').value,email:document.getElementById('cu').value,password:document.getElementById('cp').value}});setCustomerSession(result);showCustomerAccount()}catch(error){alert(error.message)}}
+async function showCustomerAccount(){const profile=customerProfile();if(!profile)return openCustomerLoginForm('login');try{const orders=await storeApi('/api/customer/orders',{token:customerToken()});openModal(`<h2>My Account</h2><p><b>${profile.name}</b><br><span class="mini">${profile.username}</span></p><button class="tab" onclick="customerLogout()">Logout</button><h3>My Orders</h3>${orders.length?orders.map(order=>`<div class="row"><span>#${order.id}<br><span class="mini">${new Date(order.created).toLocaleString()} • ${order.status}</span></span><b>${money(order.total)}</b></div>`).join(''):'<p>No orders yet.</p>'}`)}catch(error){alert(error.message);sessionStorage.removeItem('mgr_customer_token');sessionStorage.removeItem('mgr_customer_profile')}}
+async function customerLogout(){const token=customerToken();try{if(token)await storeApi('/api/auth/logout',{method:'POST',token})}catch(error){alert('Could not confirm backend logout: '+error.message)}sessionStorage.removeItem('mgr_customer_token');sessionStorage.removeItem('mgr_customer_profile');closeModal()}
+let partnerTapCount=0,partnerTapTimer=null;
+function partnerSecretTap(){
+ partnerTapCount++;
+ clearTimeout(partnerTapTimer);
+ const el=document.getElementById('partnerTap');
+ if(el){el.style.opacity='0.5';setTimeout(()=>{el.style.opacity='1'},120)}
+ partnerTapTimer=setTimeout(()=>{partnerTapCount=0},3000);
+ if(partnerTapCount>=5){partnerTapCount=0;clearTimeout(partnerTapTimer);openPartnerLogin()}
+}
+function openPartnerLogin(){openModal(`<h2>👥 Partner Portal</h2><p>Offline demo partner accounts:</p>${partners.map((p,i)=>`<div class="row"><b>${p.name}</b><span>${p.share}%</span><button class="primary" onclick="partnerDashboard(${i})">Open</button></div>`).join('')||'<p class="mini">No partners added yet. Add one from Admin → Partners.</p>'}<p class="mini">Live partner authentication will be connected after deployment.</p>`)}
+let partnerCart=[];
+function earningsForOrder(o,partnerIndex){
+ // Business rule: direct website orders split 50/50 between partners[0] & partners[1] (Karan & Reena).
+ // Orders brought in by a working partner (index>=2) split 50% to that working partner,
+ // and the remaining 50% split 25/25 between partners[0] & partners[1].
+ const profit=o.netProfit||0;
+ const isWorkingPartnerOrder=!!o.partnerName && partners.findIndex(p=>p.name===o.partnerName)>=2;
+ if(isWorkingPartnerOrder){
+  const workingIdx=partners.findIndex(p=>p.name===o.partnerName);
+  if(partnerIndex===workingIdx) return profit*0.5;
+  if(partnerIndex===0||partnerIndex===1) return profit*0.25;
+  return 0;
+ } else {
+  if(partnerIndex===0||partnerIndex===1) return profit*0.5;
+  return 0;
+ }
+}
+function totalEarningsFor(partnerIndex){return orders.filter(o=>o.paid).reduce((s,o)=>s+earningsForOrder(o,partnerIndex),0)}
+function partnerDashboard(i){const p=partners[i];if(!p)return openPartnerLogin();const profit=orders.filter(o=>o.paid).reduce((s,o)=>s+o.netProfit,0);const earned=totalEarningsFor(i);const paidAmt=Number(p.paid||0),pending=earned-paidAmt;const myOrders=orders.filter(o=>o.partnerName===p.name);const splitNote=i<=1?'Direct website orders: 50/50 with the other core partner. Working-partner orders: 25% each (of the 50% owner pool).':'You earn 50% profit on orders you personally bring in. The other 50% goes to Karan & Reena (25% each).';openModal(`<h2>👥 ${p.name}</h2><div class="grid"><div class="stat">Share<h2>${p.share}%</h2></div><div class="stat">Total Business Profit<h2>${money(profit)}</h2></div><div class="stat">Your Earned<h2>${money(earned)}</h2></div></div><p>Paid: <b>${money(paidAmt)}</b> &nbsp; Pending: <b>${money(pending)}</b></p><p class="mini">${splitNote}</p>${i>=2?`<button class="primary" onclick="partnerOrderForm(${i})">+ Create New Order for Company</button>`:'<p class="mini">Order creation is available for partners from the 3rd partner onwards.</p>'}<h3>Your Order Records</h3>${myOrders.length?myOrders.map(o=>`<div class="row"><span>#${o.id}<br><span class="mini">${o.customer} • ${o.created}</span></span><span style="text-align:right">${money(o.total)}<br><span class="mini">${o.status}</span></span><button onclick="printPartnerBill('${o.id}')">🧾 Bill</button></div>`).join(''):'<p class="mini">No orders placed yet.</p>'}<h3>Earnings History</h3>${orders.filter(o=>o.paid).map(o=>`<div class="row"><span>Order #${o.id}${o.partnerName?` <span class="mini">(via ${o.partnerName})</span>`:''}</span><span>${money(earningsForOrder(o,i))}</span></div>`).join('')||'<p>No paid orders yet.</p>'}`)}
+function partnerOrderForm(i){partnerCart=[];renderPartnerOrderForm(i)}
+function renderPartnerOrderForm(i){
+ const total=partnerCart.reduce((s,x)=>{const p=products.find(y=>y.id===x.id);return s+(p?p.p*x.qty:0)},0);
+ openModal(`<h2>New Order — via ${partners[i].name}</h2><div class="formgrid"><select id="poProd">${products.map(p=>`<option value="${p.id}">${p.e} ${p.n} — ${money(p.p)}</option>`).join('')}</select><input id="poQty" type="number" min="1" value="1" placeholder="Qty"></div><button class="primary" onclick="addPartnerCartItem(${i})">+ Add Item</button><div style="margin:14px 0">${partnerCart.length?partnerCart.map((x,idx)=>{const p=products.find(y=>y.id===x.id);return `<div class="row"><span>${p?p.e+' '+p.n:'?'} × ${x.qty}</span><span>${money((p?p.p:0)*x.qty)}</span><button onclick="removePartnerCartItem(${i},${idx})">✕</button></div>`}).join(''):'<p class="mini">No items added yet.</p>'}</div><p><b>Total: ${money(total)}</b></p><div class="formgrid"><input id="poName" placeholder="Customer name"><input id="poPhone" placeholder="Customer phone"></div><input id="poAddr" class="fullinput" placeholder="Delivery address" style="margin-top:8px"><button class="primary" style="margin-top:12px" onclick="submitPartnerOrder(${i})">Submit Order to Company</button>`);
+}
+function addPartnerCartItem(i){const id=Number(document.getElementById('poProd').value);const qty=Number(document.getElementById('poQty').value)||1;const ex=partnerCart.find(x=>x.id===id);if(ex)ex.qty+=qty;else partnerCart.push({id,qty});renderPartnerOrderForm(i)}
+function removePartnerCartItem(i,idx){partnerCart.splice(idx,1);renderPartnerOrderForm(i)}
+function submitPartnerOrder(i){
+ if(!partnerCart.length)return alert('Add at least one item');
+ const name=document.getElementById('poName').value.trim();if(!name)return alert('Customer name required');
+ const phone=document.getElementById('poPhone').value.trim();
+ const addr=document.getElementById('poAddr').value.trim();
+ const p=partners[i];
+ const total=partnerCart.reduce((s,x)=>{const pr=products.find(y=>y.id===x.id);return s+(pr?pr.p*x.qty:0)},0);
+ const order={id:'PTR-'+Date.now().toString(36).toUpperCase()+Math.random().toString(36).slice(2,4).toUpperCase(),customer:name,phone,address:addr,total,status:'Pending — Partner Order',items:partnerCart.map(x=>({...x})),created:new Date().toLocaleString(),paid:false,netProfit:0,partnerName:p.name};
+ orders.unshift(order);
+ partnerCart.forEach(x=>{const pr=products.find(y=>y.id===x.id);if(pr)pr.stock-=x.qty});
+ save();
+ partnerCart=[];
+ openModal(`<h2>✅ Order Sent to Company</h2><p>Order <b>#${order.id}</b> recorded and sent to MGR LIFE STYLE for processing.</p><p>Total: <b>${money(total)}</b></p><button class="primary" onclick="printPartnerBill('${order.id}')">🧾 Print Bill</button><button onclick="partnerDashboard(${i})">Back to Dashboard</button>`);
+}
+function printPartnerBill(orderId){
+ const o=orders.find(x=>x.id===orderId);if(!o)return;
+ const rows=o.items.map(x=>{const p=products.find(y=>y.id===x.id);const price=p?p.p:0;return `<tr><td>${p?p.e+' '+p.n:'Item'}</td><td>${x.qty}</td><td>${money(price)}</td><td>${money(price*x.qty)}</td></tr>`}).join('');
+ const bill=`<div style="max-width:600px;margin:auto;font-family:Georgia,serif"><h1 style="margin-bottom:0">MGR LIFE STYLE</h1><p style="margin-top:4px;color:#555">Support: 7624006324 • MGRLIFESTLYE0@gmail.com</p><hr><h2>Invoice — #${o.id}</h2><p>Date: ${o.created}</p><p>Customer: <b>${o.customer}</b>${o.phone?' • '+o.phone:''}</p>${o.address?`<p>Address: ${o.address}</p>`:''}${o.partnerName?`<p>Booked by Partner: <b>${o.partnerName}</b></p>`:''}<table><tr><th>Item</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr>${rows}</table><h3 style="text-align:right">Total: ${money(o.total)}</h3><p style="color:#555">Status: ${o.status}</p></div>`;
+ document.getElementById('printArea').innerHTML=bill;
+ openModal(`<h2>🧾 Bill Preview</h2>${bill}<button class="primary" onclick="window.print()">🖨 Print / Save as PDF</button>`);
+}
+function showInfo(title,text){openModal(`<h2>${title}</h2><p>${text}</p>`)}
+function openModal(content){document.getElementById('modalContent').innerHTML=content;document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+
+/* ===== Data Sync (export / import between Store and Admin files) ===== */
+function buildSnapshot(from){
+ let settings=null;try{settings=JSON.parse(localStorage.getItem('mgr_offline_settings')||'null')}catch(e){}
+ return {app:'MGR_LIFE_STYLE',v:1,from,ts:new Date().toISOString(),data:{products,cats:CATS,subs:SUBS,partners,orders,expenses,customers,settings}};
+}
+function encodeSnapshot(from){return 'MGRSYNC1:'+btoa(unescape(encodeURIComponent(JSON.stringify(buildSnapshot(from)))))}
+function decodeSnapshot(text){
+ text=(text||'').trim();if(!text)throw new Error('Empty');
+ if(text.startsWith('MGRSYNC1:')){return JSON.parse(decodeURIComponent(escape(atob(text.slice(9).replace(/\s+/g,'')))))}
+ const i=text.indexOf('{');return JSON.parse(text.slice(i));
+}
+function applySnapshot(snap,role){
+ if(!snap||snap.app!=='MGR_LIFE_STYLE'||!snap.data)throw new Error('Not a MGR LIFE STYLE sync data');
+ const d=snap.data;let msg=[];
+ if(role==='admin'){
+  let added=0;
+  (d.orders||[]).forEach(o=>{if(!orders.find(x=>x.id===o.id)){orders.unshift(o);(o.items||[]).forEach(it=>{const p=products.find(y=>y.id===it.id);if(p)p.stock=Math.max(0,p.stock-it.qty)});added++}});
+  let newC=0;(d.customers||[]).forEach(c=>{if(!customers.find(x=>x.u===c.u)){customers.push(c);newC++}});
+  save();msg.push(added+' new order(s) received',newC+' new customer(s)');
+ } else {
+  const incomingIds=new Set((d.orders||[]).map(o=>o.id));
+  const localOnly=orders.filter(o=>!incomingIds.has(o.id));
+  if(Array.isArray(d.products))products=d.products;
+  if(Array.isArray(d.cats))CATS=d.cats;
+  if(Array.isArray(d.subs))SUBS=d.subs;
+  if(Array.isArray(d.partners))partners=d.partners;
+  if(d.settings)localStorage.setItem('mgr_offline_settings',JSON.stringify(d.settings));
+  orders=[...localOnly,...(d.orders||[])];
+  localOnly.forEach(o=>(o.items||[]).forEach(it=>{const p=products.find(y=>y.id===it.id);if(p)p.stock=Math.max(0,p.stock-it.qty)}));
+  save();saveCats();saveSubs();
+  if(typeof renderCategoryUI==='function')renderCategoryUI();if(typeof renderProducts==='function')renderProducts();
+  msg.push('Products, categories & partners updated',(d.orders||[]).length+' order record(s) synced');
+ }
+ return msg.join(' • ');
+}
+function syncPanelHTML(role){
+ const code=encodeSnapshot(role);
+ const other=role==='admin'?'Store (website) file':'Admin file';
+ return `<div class="notice">Data aa device na browser ma save thay che. Admin ane Store alag files che, etle data vahenchva mate niche "Send / Receive" vapro.<br><span class="mini">${role==='admin'?'1) Admin: Export karo → Store ma Import karo (products/categories/partners).<br>2) Store: Export karo → Admin ma Import karo (navi orders).':'Admin file mathi Export kareli data ahi Import karo. Ane tamara orders Admin ma mokva mate niche Export karo.'}</span></div>
+ <h3>📤 Send data to ${other}</h3>
+ <button class="primary" onclick="syncDownload('${role}')">⬇ Download file</button> <button class="tab" onclick="syncCopy()">📋 Copy code</button>
+ <textarea id="syncOut" class="fullinput" rows="3" readonly style="margin-top:8px;font-size:11px">${code}</textarea>
+ <h3 style="margin-top:18px">📥 Receive data from ${other}</h3>
+ <input type="file" id="syncFile" accept=".json,.txt,application/json,text/plain" class="fullinput" onchange="syncImportFile('${role}')">
+ <p class="mini" style="margin:6px 0">ya code paste karo:</p>
+ <textarea id="syncIn" class="fullinput" rows="3" placeholder="MGRSYNC1:..." style="font-size:11px"></textarea>
+ <button class="primary" style="margin-top:8px" onclick="syncImportText('${role}')">Import data</button>
+ <p id="syncMsg" class="mini" style="margin-top:8px"></p>`;
+}
+function syncDownload(role){
+ try{const blob=new Blob([JSON.stringify(buildSnapshot(role),null,1)],{type:'application/json'});const a=document.createElement('a');const d=new Date();const pad=n=>String(n).padStart(2,'0');
+  a.href=URL.createObjectURL(blob);a.download='mgr-sync-'+role+'-'+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+pad(d.getHours())+pad(d.getMinutes())+'.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+  syncSay('File download thai rahi che. Na thay to "Copy code" vapro.')}catch(e){syncSay('Download na thayu — "Copy code" vapro.',true)}
+}
+function syncCopy(){
+ const ta=document.getElementById('syncOut');ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
+ let ok=false;try{ok=document.execCommand('copy')}catch(e){}
+ if(!ok&&navigator.clipboard){navigator.clipboard.writeText(ta.value).then(()=>syncSay('Code copy thai gayo ✓'),()=>syncSay('Copy na thayu — upar na box ma long-press karine copy karo.',true));return}
+ syncSay(ok?'Code copy thai gayo ✓':'Copy na thayu — upar na box ma long-press karine copy karo.',!ok);
+}
+function syncImportText(role){try{const msg=applySnapshot(decodeSnapshot(document.getElementById('syncIn').value),role);syncSay('✓ Import thayu: '+msg);syncAfter(role)}catch(e){syncSay('Import na thayu: '+e.message,true)}}
+function syncImportFile(role){
+ const f=document.getElementById('syncFile').files[0];if(!f)return;const r=new FileReader();
+ r.onload=()=>{try{const msg=applySnapshot(decodeSnapshot(String(r.result)),role);syncSay('✓ Import thayu: '+msg);syncAfter(role)}catch(e){syncSay('Import na thayu: '+e.message,true)}};
+ r.onerror=()=>syncSay('File vanchay nahi',true);r.readAsText(f);
+}
+function syncSay(t,bad){const el=document.getElementById('syncMsg');if(el){el.textContent=t;el.className='mini '+(bad?'bad':'ok')}}
+function syncAfter(role){}
+async function reloadCatalog(){try{const catalog=await storeApi('/api/catalog');products=catalog.products;CATS=catalog.cats;SUBS=catalog.subs;localStorage.setItem('mgr_offline_products',JSON.stringify(products));localStorage.setItem('mgr_offline_categories',JSON.stringify(CATS));localStorage.setItem('mgr_offline_subcats',JSON.stringify(SUBS));const status=document.getElementById('backendStatus');if(status)status.textContent='Local PC backend • Data stays on this computer';renderCategoryUI();renderProducts()}catch(error){const status=document.getElementById('backendStatus');if(status)status.textContent='Local backend unavailable — start START_LOCAL_BACKEND.bat';console.error(error)}}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)reloadCatalog()});
+window.addEventListener('focus',reloadCatalog);
+
+let syncTapCount=0,syncTapTimer=null;
+function syncSecretTap(){
+ syncTapCount++;clearTimeout(syncTapTimer);
+ const el=document.getElementById('syncTap');if(el){el.style.opacity='0.5';setTimeout(()=>{el.style.opacity='1'},120)}
+ syncTapTimer=setTimeout(()=>{syncTapCount=0},3000);
+ if(syncTapCount>=5){syncTapCount=0;clearTimeout(syncTapTimer);openStoreSync()}
+}
+function openStoreSync(){openModal('<h2>🔄 Shared Local Backend</h2><div class="notice">Store અને Admin બંને આ PCના એક જ backendમાંથી products, stock, customer accounts અને orders વાપરે છે. સામાન્ય ઉપયોગમાં manual sync જરૂરી નથી. જૂની offline data import કરવા Admin panelના Sync tabનો ઉપયોગ કરો.</div>')}
+renderCategoryUI();renderProducts();reloadCatalog();
+</script>
+</body>
+</html>

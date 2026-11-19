@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>MGR LIFE STYLE — Accounts</title>
+<style>
+:root{font-family:"Segoe UI",Arial,sans-serif;color:#25251f;background:#f6f5f1;font-synthesis:none;text-rendering:optimizeLegibility;--gold:#a37a2a;--line:#e6e2d9;--muted:#777469;--white:#fff}
+*{box-sizing:border-box}body{margin:0;min-width:320px}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.topbar{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:2}
+.brand{font-family:Georgia,serif;font-size:21px;letter-spacing:.04em}.brand span{color:var(--gold);font-style:italic}.connection{font-size:12px;color:#52785e}.top-actions{display:flex;align-items:center;gap:14px}.top-actions a,.top-actions button{color:#514d43;background:none;border:0;text-decoration:none}
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:calc(100vh - 68px)}aside{background:#fff;border-right:1px solid var(--line);padding:24px 14px}.nav-title{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:0 12px 12px}.nav{display:grid;gap:5px}.nav button{text-align:left;border:0;border-radius:6px;background:transparent;padding:11px 12px;color:#514d43}.nav button.active,.nav button:hover{background:#f4efe2;color:#765817}.nav-note{font-size:11px;color:var(--muted);line-height:1.55;border-top:1px solid var(--line);padding:15px 11px;margin-top:24px}
+main{padding:28px;max-width:1440px;width:100%;margin:0 auto}.page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}.page-head h1{font-family:Georgia,serif;font-weight:400;font-size:28px;margin:0 0 7px}.muted{color:var(--muted);font-size:13px}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}.card,.panel{background:var(--white);border:1px solid var(--line);border-radius:8px}.card{padding:18px}.card-label{font-size:12px;color:var(--muted)}.card-value{font-family:Georgia,serif;font-size:25px;margin-top:8px;color:#624c1c}.panel{padding:20px;margin-top:18px}.panel h2{font-family:Georgia,serif;font-weight:400;font-size:19px;margin:0 0 14px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.field{display:grid;gap:6px;font-size:12px;color:#645f54}.field input,.field select,.field textarea,.login-box input{width:100%;border:1px solid #dcd7cb;border-radius:5px;background:#fff;padding:10px;color:#25251f}.field textarea{resize:vertical}.wide{grid-column:1/-1}.primary{border:1px solid #8e6d24;background:#9c772b;color:#fff;border-radius:5px;padding:10px 15px}.secondary{border:1px solid #dcd7cb;background:#fff;color:#514d43;border-radius:5px;padding:9px 13px}.danger{color:#9a3931}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px;min-width:650px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #eeeae2;vertical-align:top}th{color:var(--muted);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em}td.amount,th.amount{text-align:right;white-space:nowrap}.pill{display:inline-block;padding:3px 8px;border-radius:99px;background:#f1eee6;font-size:11px}.notice{padding:12px 14px;border:1px solid #e3d3ad;background:#fbf7ed;color:#64542e;border-radius:5px;line-height:1.5;font-size:12px}.empty{padding:25px;text-align:center;color:var(--muted);font-size:13px}.actions{display:flex;gap:8px;align-items:center}.hidden{display:none!important}.login-screen{min-height:100vh;display:grid;place-items:center;padding:20px}.login-box{width:min(420px,100%);background:#fff;border:1px solid var(--line);border-radius:9px;padding:28px;box-shadow:0 16px 55px #443b2814}.login-box h1{font-family:Georgia,serif;font-size:25px;font-weight:400;margin:0 0 8px}.login-box form{display:grid;gap:12px;margin:20px 0}.error{color:#a3332e;font-size:13px}.success{color:#3d7651;font-size:13px}.right{text-align:right}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}main{padding:20px}}
+@media(max-width:650px){.topbar{height:auto;min-height:60px;padding:12px 16px;flex-wrap:wrap;gap:8px}.brand{font-size:18px}.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line);padding:9px;position:sticky;top:56px;z-index:1;overflow:auto}.nav-title,.nav-note{display:none}.nav{display:flex;gap:5px;min-width:max-content}.nav button{padding:9px}.page-head h1{font-size:24px}.page-head{align-items:center}main{padding:15px}.cards{gap:9px}.card{padding:13px}.card-value{font-size:20px}.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}.connection{display:none}}
+</style>
+</head>
+<body>
+<section id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <div class="brand">MGR <span>LIFE STYLE</span></div>
+    <h1>Accounts</h1>
+    <p class="muted">Sign in with your website Admin account.</p>
+    <form id="loginForm">
+      <label class="field">Admin username<input id="username" autocomplete="username" required></label>
+      <label class="field">Password<input id="password" type="password" autocomplete="current-password" required></label>
+      <button class="primary" type="submit">Sign in</button>
+    </form>
+    <p id="loginMessage" role="status" class="error"></p>
+    <div class="notice">Uses the same local account and SQLite business data as the website. Start the local backend before signing in.</div>
+  </div>
+</section>
+<div id="app" class="hidden">
+  <header class="topbar">
+    <div class="brand">MGR <span>LIFE STYLE</span> <small style="font:11px 'Segoe UI',sans-serif;color:#777">ACCOUNTS</small></div>
+    <div class="top-actions"><span id="connection" class="connection">Connected to local backend</span><a href="/MGR_LIFE_STYLE_v22_STORE.html">Open Store</a><button type="button" onclick="logout()">Logout</button></div>
+  </header>
+  <div class="layout">
+    <aside><div class="nav-title">Bookkeeping</div><nav id="nav" class="nav">
+      <button class="active" data-page="dashboard">◫ &nbsp; Overview</button>
+      <button data-page="sales">▤ &nbsp; Website Sales</button>
+      <button data-page="purchases">＋ &nbsp; Purchases</button>
+      <button data-page="expenses">− &nbsp; Expenses</button>
+      <button data-page="cashbook">▦ &nbsp; Cashbook</button>
+      <button data-page="reports">▥ &nbsp; Reports & Export</button>
+    </nav><div class="nav-note">Accounts data is shared with the MGR LIFE STYLE website and stored on this PC.</div></aside>
+    <main id="content"></main>
+  </div>
+</div>
+<script>
+const API='/api';
+let token=sessionStorage.getItem('mgr_admin_token')||'';
+let state=null;
+let currentPage='dashboard';
+const money=value=>'₹'+Number(value||0).toLocaleString('en-IN',{maximumFractionDigits:2});
+const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const dateText=value=>{const date=new Date(value);return Number.isNaN(date.getTime())?'—':date.toLocaleDateString('en-IN')};
+async function api(path,options={}){
+ const headers={'Content-Type':'application/json'};
+ if(token)headers.Authorization='Bearer '+token;
+ const response=await fetch(API+path,{method:options.method||'GET',headers,body:options.body?JSON.stringify(options.body):undefined});
+ const data=await response.json().catch(()=>({error:'Invalid backend response'}));
+ if(!response.ok)throw new Error(data.error||'Backend request failed');
+ return data;
+}
+function setMessage(id,message,success=false){const element=document.getElementById(id);if(element){element.textContent=message;element.className=success?'success':'error'}}
+document.getElementById('loginForm').addEventListener('submit',async event=>{
+ event.preventDefault();setMessage('loginMessage','');
+ try{
+  const result=await api('/auth/login',{method:'POST',body:{username:document.getElementById('username').value,password:document.getElementById('password').value,role:'admin'}});
+  token=result.token;sessionStorage.setItem('mgr_admin_token',token);await loadState();
+ }catch(error){setMessage('loginMessage',error.message)}
+});
+document.getElementById('nav').addEventListener('click',event=>{
+ const button=event.target.closest('button[data-page]');if(!button)return;
+ currentPage=button.dataset.page;render();
+});
+async function loadState(){
+ try{
+  const user=await api('/session');
+  if(user.user.role!=='admin')throw new Error('Admin access required');
+  state=await api('/accounting/state');
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('connection').textContent='Connected • '+user.user.name;
+  render();
+ }catch(error){
+  token='';sessionStorage.removeItem('mgr_admin_token');
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('app').classList.add('hidden');
+  setMessage('loginMessage',error.message);
+ }
+}
+async function refresh(){state=await api('/accounting/state');render()}
+function paidOrders(){return state.orders.filter(order=>order.paid)}
+function paidSales(){return paidOrders().reduce((sum,order)=>sum+Number(order.total||0),0)}
+function paidCogs(){return paidOrders().reduce((sum,order)=>sum+Number(order.total||0)-Number(order.netProfit||0),0)}
+function totalExpenses(){return state.expenses.reduce((sum,item)=>sum+Number(item.amount||0),0)}
+function totalPurchases(){return state.purchases.reduce((sum,item)=>sum+Number(item.amount||0),0)}
+function metric(label,value,note=''){return `<article class="card"><div class="card-label">${esc(label)}</div><div class="card-value">${money(value)}</div>${note?`<div class="muted">${esc(note)}</div>`:''}</article>`}
+function pageHead(title,subtitle,action=''){return `<div class="page-head"><div><h1>${title}</h1><div class="muted">${subtitle}</div></div>${action}</div>`}
+function table(headers,rows){if(!rows.length)return '<div class="empty">No records yet.</div>';return `<div class="table-wrap"><table><thead><tr>${headers.map(header=>`<th class="${header.right?'amount':''}">${header.label}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`}
+function render(){
+ document.querySelectorAll('#nav button').forEach(button=>button.classList.toggle('active',button.dataset.page===currentPage));
+ const views={dashboard:dashboardView,sales:salesView,purchases:purchasesView,expenses:expensesView,cashbook:cashbookView,reports:reportsView};
+ document.getElementById('content').innerHTML=views[currentPage]();
+}
+function dashboardView(){
+ const profit=paidOrders().reduce((sum,order)=>sum+Number(order.netProfit||0),0)-totalExpenses();
+ const cash=paidSales()-totalPurchases()-totalExpenses();
+ const recent=[...state.orders.slice(0,5).map(order=>({date:order.created,kind:'Website sale',party:order.customer,amount:order.total,status:order.status})),...state.purchases.slice(0,5).map(item=>({date:item.date,kind:'Purchase',party:item.supplier,amount:-item.amount,status:item.invoice||'Recorded'})),...state.expenses.slice(0,5).map(item=>({date:item.date,kind:'Expense',party:item.title,amount:-item.amount,status:item.category||'Recorded'}))].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,8);
+ return `${pageHead('Accounts overview','Sales from the website plus purchases and expenses in one local account book.','<button class="secondary" onclick="refresh()">↻ Refresh</button>')}
+ <div class="cards">${metric('Paid website sales',paidSales(),paidOrders().length+' paid order(s)')}${metric('Purchases',totalPurchases(),state.purchases.length+' supplier record(s)')}${metric('Expenses',totalExpenses(),state.expenses.length+' expense record(s)')}${metric('Cashbook balance',cash,'Paid sales − purchases − expenses')}${metric('Estimated net profit',profit,'Paid order profit − expenses')}${metric('Pending orders',state.orders.filter(order=>!order.paid).length,'Not counted as paid sales')}</div>
+ <div class="notice">Basic bookkeeping only. Purchases reduce cashbook balance; inventory cost is counted in profit only when a website order is marked paid. GST filing and payment processing are not included.</div>
+ <section class="panel"><div class="panel-head"><h2>Recent activity</h2><button class="secondary" onclick="go('cashbook')">Open cashbook</button></div>${table([{label:'Date'},{label:'Type'},{label:'Customer / party'},{label:'Status'},{label:'Amount',right:true}],recent.map(row=>`<tr><td>${dateText(row.date)}</td><td>${esc(row.kind)}</td><td>${esc(row.party)}</td><td>${esc(row.status)}</td><td class="amount">${money(row.amount)}</td></tr>`))}</section>`;
+}
+function saleRows(orders=state.orders){
+ return [...orders].sort((a,b)=>new Date(b.created)-new Date(a.created)).map(order=>`<tr><td>${esc(order.id)}</td><td>${esc(order.customer)}<br><span class="muted">${esc(order.email||'')}</span></td><td>${dateText(order.created)}</td><td><span class="pill">${esc(order.status)}</span></td><td class="amount">${money(order.total)}</td><td>${order.paid?money(order.netProfit):'—'}</td></tr>`);
+}
+function salesView(){return `${pageHead('Website sales','Orders and payment status shared with the MGR LIFE STYLE website.','<button class="secondary" onclick="refresh()">↻ Refresh</button>')}<div class="cards">${metric('Paid sales',paidSales())}${metric('All orders',state.orders.length)}${metric('Pending payment',state.orders.filter(order=>!order.paid).length)}${metric('Estimated order profit',paidOrders().reduce((sum,order)=>sum+Number(order.netProfit||0),0))}</div><section class="panel"><h2>Sales ledger</h2>${table([{label:'Order'},{label:'Customer'},{label:'Date'},{label:'Payment'},{label:'Amount',right:true},{label:'Profit'}],saleRows())}</section>`}
+function purchaseRows(purchases=state.purchases){return [...purchases].sort((a,b)=>new Date(b.date)-new Date(a.date)).map(item=>`<tr><td>${dateText(item.date)}</td><td>${esc(item.supplier)}</td><td>${esc(item.invoice||'—')}</td><td>${esc(item.item)}</td><td>${item.quantity??'—'}</td><td class="amount">${money(item.amount)}</td><td>${esc(item.notes||'')}</td></tr>`)}
+function purchasesView(){
+ const options=state.products.map(product=>`<option value="${esc(product.id)}">${esc(product.n)} (stock ${Number(product.stock)||0})</option>`).join('');
+ return `${pageHead('Purchases','Record supplier purchases. Optionally select a product to add its quantity to website stock.')}
+ <section class="panel"><h2>New purchase entry</h2><form id="purchaseForm" class="form-grid">
+ <label class="field">Supplier name<input name="supplier" required maxlength="200"></label><label class="field">Supplier invoice number<input name="invoice" maxlength="100"></label><label class="field">Purchase date<input name="date" type="date" value="${new Date().toISOString().slice(0,10)}" required></label>
+ <label class="field">Item / description<input name="item" required maxlength="200"></label><label class="field">Link website product (optional)<select name="productId"><option value="">No stock change</option>${options}</select></label><label class="field">Quantity (for linked product)<input name="quantity" type="number" min="1" step="1"></label>
+ <label class="field">Total purchase amount (₹)<input name="amount" type="number" min="0.01" step="0.01" required></label><label class="field wide">Notes<textarea name="notes" rows="2" maxlength="1000"></textarea></label><div><button class="primary" type="submit">Save purchase</button> <span id="purchaseMessage" role="status"></span></div></form></section>
+ <section class="panel"><h2>Supplier purchase ledger</h2>${table([{label:'Date'},{label:'Supplier'},{label:'Invoice'},{label:'Item'},{label:'Qty'},{label:'Amount',right:true},{label:'Notes'}],purchaseRows())}</section>`;
+}
+function expenseRows(expenses=state.expenses){return [...expenses].sort((a,b)=>new Date(b.date)-new Date(a.date)).map(item=>`<tr><td>${dateText(item.date)}</td><td>${esc(item.title)}</td><td>${esc(item.category||'—')}</td><td class="amount">${money(item.amount)}</td><td>${esc(item.notes||'')}</td></tr>`)}
+function expensesView(){return `${pageHead('Expenses','Add business expenses. Entries also appear in the website Admin reports.')}
+ <section class="panel"><h2>New expense entry</h2><form id="expenseForm" class="form-grid">
+ <label class="field">Description<input name="title" required maxlength="200"></label><label class="field">Category<input name="category" placeholder="Rent, delivery, utilities…" maxlength="100"></label><label class="field">Date<input name="date" type="date" value="${new Date().toISOString().slice(0,10)}" required></label>
+ <label class="field">Amount (₹)<input name="amount" type="number" min="0.01" step="0.01" required></label><label class="field wide">Notes<textarea name="notes" rows="2" maxlength="1000"></textarea></label><div><button class="primary" type="submit">Save expense</button> <span id="expenseMessage" role="status"></span></div></form></section>
+ <section class="panel"><h2>Expense ledger</h2>${table([{label:'Date'},{label:'Description'},{label:'Category'},{label:'Amount',right:true},{label:'Notes'}],expenseRows())}</section>`}
+function cashbookView(){
+ const rows=[
+  ...paidOrders().map(order=>({date:order.created,type:'Website sale',party:order.customer,reference:order.id,income:Number(order.total)||0,out:0})),
+  ...state.purchases.map(item=>({date:item.date,type:'Purchase',party:item.supplier,reference:item.invoice||item.id,income:0,out:Number(item.amount)||0})),
+  ...state.expenses.map(item=>({date:item.date,type:'Expense',party:item.title,reference:item.category||'—',income:0,out:Number(item.amount)||0}))
+ ].sort((a,b)=>new Date(b.date)-new Date(a.date));
+ return `${pageHead('Cashbook','Cash in/out records. Pending payment orders are not counted as received.','<button class="secondary" onclick="exportCashbook()">Export CSV</button>')}
+ <div class="cards">${metric('Cash received',paidSales())}${metric('Purchases paid',totalPurchases())}${metric('Expenses paid',totalExpenses())}${metric('Net cashbook balance',paidSales()-totalPurchases()-totalExpenses())}</div>
+ <section class="panel"><h2>Cashbook entries</h2>${table([{label:'Date'},{label:'Type'},{label:'Party / description'},{label:'Reference'},{label:'Money in',right:true},{label:'Money out',right:true}],rows.map(row=>`<tr><td>${dateText(row.date)}</td><td>${esc(row.type)}</td><td>${esc(row.party)}</td><td>${esc(row.reference)}</td><td class="amount">${row.income?money(row.income):'—'}</td><td class="amount">${row.out?money(row.out):'—'}</td></tr>`))}</section>`;
+}
+function reportsView(){
+ const supplierTotals=new Map(),customerTotals=new Map();
+ state.purchases.forEach(item=>supplierTotals.set(item.supplier,(supplierTotals.get(item.supplier)||0)+Number(item.amount||0)));
+ state.orders.forEach(order=>customerTotals.set(order.customer,(customerTotals.get(order.customer)||0)+Number(order.total||0)));
+ return `${pageHead('Reports & export','Download account ledgers as CSV files for your records.')}
+ <section class="panel"><div class="panel-head"><h2>Export records</h2><div class="actions"><button class="secondary" onclick="exportSales()">Sales CSV</button><button class="secondary" onclick="exportPurchases()">Purchases CSV</button><button class="secondary" onclick="exportExpenses()">Expenses CSV</button><button class="primary" onclick="exportCashbook()">Cashbook CSV</button></div></div><p class="muted">CSV exports can be opened in Excel or imported into other accounting tools.</p></section>
+ <div class="cards">${metric('Customers with orders',customerTotals.size)}${metric('Suppliers',supplierTotals.size)}${metric('Paid sales',paidSales())}${metric('Outstanding orders',state.orders.filter(order=>!order.paid).reduce((sum,order)=>sum+Number(order.total||0),0))}</div>
+ <section class="panel"><h2>Supplier totals</h2>${table([{label:'Supplier'},{label:'Purchase entries'},{label:'Total',right:true}],[...supplierTotals].map(([name,total])=>`<tr><td>${esc(name)}</td><td>${state.purchases.filter(item=>item.supplier===name).length}</td><td class="amount">${money(total)}</td></tr>`))}</section>
+ <section class="panel"><h2>Customer order totals</h2>${table([{label:'Customer'},{label:'Orders'},{label:'Order total',right:true}],[...customerTotals].map(([name,total])=>`<tr><td>${esc(name)}</td><td>${state.orders.filter(order=>order.customer===name).length}</td><td class="amount">${money(total)}</td></tr>`))}</section>
+ <div class="notice">These reports are bookkeeping summaries, not audited financial statements or GST returns.</div>`;
+}
+function go(page){currentPage=page;render()}
+document.addEventListener('submit',async event=>{
+ if(event.target.id!=='purchaseForm'&&event.target.id!=='expenseForm')return;
+ event.preventDefault();const form=event.target,values=Object.fromEntries(new FormData(form));
+ try{
+  if(form.id==='purchaseForm')await api('/accounting/purchases',{method:'POST',body:values});
+  else await api('/accounting/expenses',{method:'POST',body:values});
+  await refresh();
+ }catch(error){setMessage(form.id==='purchaseForm'?'purchaseMessage':'expenseMessage',error.message)}
+});
+function csvEscape(value){return '"'+String(value??'').replace(/"/g,'""')+'"'}
+function downloadCsv(filename,rows){const csv='\uFEFF'+rows.map(row=>row.map(csvEscape).join(',')).join('\r\n');const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));link.download=filename;link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000)}
+function exportSales(){downloadCsv('mgr-sales.csv',[['Order','Date','Customer','Email','Status','Total','Paid','Profit'],...state.orders.map(order=>[order.id,order.created,order.customer,order.email,order.status,order.total,order.paid?'Yes':'No',order.netProfit])])}
+function exportPurchases(){downloadCsv('mgr-purchases.csv',[['Date','Supplier','Invoice','Item','Quantity','Amount','Notes'],...state.purchases.map(item=>[item.date,item.supplier,item.invoice,item.item,item.quantity,item.amount,item.notes])])}
+function exportExpenses(){downloadCsv('mgr-expenses.csv',[['Date','Description','Category','Amount','Notes'],...state.expenses.map(item=>[item.date,item.title,item.category,item.amount,item.notes])])}
+function exportCashbook(){const rows=[['Date','Type','Party','Reference','Money in','Money out'],...paidOrders().map(order=>[order.created,'Website sale',order.customer,order.id,order.total,'']),...state.purchases.map(item=>[item.date,'Purchase',item.supplier,item.invoice,'',item.amount]),...state.expenses.map(item=>[item.date,'Expense',item.title,item.category,'',item.amount])];downloadCsv('mgr-cashbook.csv',rows)}
+async function logout(){try{await api('/auth/logout',{method:'POST'})}catch{}token='';state=null;sessionStorage.removeItem('mgr_admin_token');document.getElementById('app').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('password').value=''}
+if(token)loadState();
+</script>
+</body>
+</html>

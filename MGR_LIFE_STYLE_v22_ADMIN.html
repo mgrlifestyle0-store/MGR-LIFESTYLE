@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>MGR LIFE STYLE — Admin</title>
+<style>
+:root{--bg:#ffffff;--surface:#fbfaf7;--surface-2:#f3f0e7;--champ:#b8924f;--champ-onlight:#8a6a1f;--champ-ondark:#e7d5ab;--champ-deep:#6e551a;--ink:#1c1b18;--muted:#7d7869;--line:rgba(0,0,0,.1);--ok:#3d8a5e;--danger:#a3332e}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit}button{cursor:pointer}
+.top{background:var(--surface-2);color:var(--champ-onlight);padding:9px 5%;font-size:11.5px;letter-spacing:.08em;display:flex;justify-content:space-between;border-bottom:1px solid var(--line)}
+.header{background:#fff;padding:18px 5%;display:flex;align-items:center;gap:25px;border-bottom:1px solid var(--line)}
+.logo{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:24px;white-space:nowrap;color:var(--ink);letter-spacing:.04em;display:flex;align-items:center;gap:11px}
+.logo .crest{width:32px;height:32px;border-radius:50%;border:1px solid var(--champ);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--champ-onlight)}
+.logo span{color:var(--champ-onlight);font-style:italic}.tag{font-size:9.5px;color:var(--muted);font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
+.search{display:flex;flex:1;max-width:650px}.search input{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:2px 0 0 2px;background:var(--surface);color:var(--ink)}.search input::placeholder{color:var(--muted)}.search input:focus{outline:none;border-color:var(--champ)}.search button{width:52px;border:1px solid var(--champ);border-left:0;background:transparent;border-radius:0 2px 2px 0;color:var(--champ-onlight);font-weight:700}
+.actions{display:flex;gap:16px;font-size:13.5px;white-space:nowrap}.actions button{border:0;background:none;color:var(--ink);font-weight:400;letter-spacing:.02em}.actions b{color:var(--champ-onlight)}
+.nav{background:#fff;color:var(--ink);padding:12px 5%;display:flex;gap:28px;align-items:center;border-bottom:1px solid var(--line)}
+.nav button{background:none;border:0;color:var(--ink);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 0;border-bottom:1px solid transparent}.nav button:hover{color:var(--champ-onlight);border-bottom-color:var(--champ)}
+.hero{margin:1px auto 18px;max-width:1250px;overflow:hidden;background:linear-gradient(160deg,#000,#141416 70%);color:#fff;padding:80px 7%;min-height:320px;position:relative;border:1px solid var(--line)}
+.hero:after{content:"";position:absolute;right:6%;top:50%;transform:translateY(-50%);width:210px;height:210px;border-radius:50%;border:1px solid rgba(231,213,171,.3)}
+.hero:before{content:"";position:absolute;right:calc(6% + 40px);top:50%;transform:translateY(-50%);width:130px;height:130px;border-radius:50%;border:1px solid rgba(231,213,171,.18)}
+.hero>*{position:relative;z-index:1}.eyebrow{display:inline-block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--champ-ondark);border-bottom:1px solid var(--champ);padding-bottom:6px;margin-bottom:22px}
+.hero h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:48px;line-height:1.12;margin:0 0 16px;max-width:600px;letter-spacing:.01em}
+.gold{color:var(--champ-ondark);font-style:italic}
+.hero p{font-size:15.5px;color:#a9a59a;max-width:440px;letter-spacing:.02em}
+.primary{background:var(--champ-ondark);border:1px solid var(--champ-ondark);color:#0a0a0b;padding:13px 26px;border-radius:2px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:12.5px}
+.primary:hover{background:transparent;color:var(--champ)}
+.container{max-width:1250px;margin:auto;padding:0 18px}
+.trustline{background:#000;color:var(--champ-ondark);text-align:center;padding:11px 5%;font-size:12px;letter-spacing:.03em}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border:1px solid var(--line);margin:18px 0;padding:26px 10px;gap:8px}
+.trust div{text-align:center;position:relative}.trust div:not(:last-child):after{content:"";position:absolute;right:0;top:15%;height:70%;width:1px;background:var(--line)}
+.trust span{display:inline-flex;width:38px;height:38px;border-radius:50%;align-items:center;justify-content:center;border:1px solid var(--champ);font-size:16px;margin-bottom:10px;color:var(--champ-onlight)}
+.trust b{display:block;font-family:Georgia,serif;font-weight:400;font-size:14px;color:var(--ink);letter-spacing:.02em}.trust small{color:var(--muted);font-size:11.5px;letter-spacing:.02em}
+h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:26px;color:var(--ink);letter-spacing:.01em}
+.categories{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:50%;aspect-ratio:1;padding:18px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:border-color .15s}
+.cat:hover{border-color:var(--champ)}
+.cat .icon{font-size:28px;filter:grayscale(.15)}.cat small{margin-top:7px;color:var(--ink);font-weight:400;font-size:12px;letter-spacing:.02em}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.sectionhead button{border:0;background:none;color:var(--champ-onlight);font-weight:400;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:20px}
+.side,.product,.card{background:var(--surface);border:1px solid var(--line);border-radius:2px}
+.side{padding:18px}.side b{font-family:Georgia,serif;color:var(--ink);font-weight:400;letter-spacing:.03em}.side label{display:block;padding:8px 0;font-size:13.5px;color:var(--muted)}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.product{padding:12px;position:relative;transition:border-color .15s,transform .15s}
+.product:hover{border-color:var(--champ);transform:translateY(-2px)}
+.pic{height:185px;border-radius:2px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:68px;border:1px solid var(--line)}
+.badge{position:absolute;top:20px;left:20px;background:#000;border:1px solid var(--champ);color:var(--champ-ondark);border-radius:2px;padding:4px 8px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:400}
+.product h3{font-family:Georgia,serif;font-weight:400;font-size:15px;margin:12px 0 6px;color:var(--ink);letter-spacing:.01em}
+.stars{color:var(--champ);font-size:13px}
+.price{font-size:18px;font-weight:400;margin:7px 0;color:var(--champ-onlight);font-family:Georgia,serif}
+.old{text-decoration:line-through;color:var(--muted);font-size:12px;font-weight:400}
+.add{width:100%;background:transparent;border:1px solid var(--champ);padding:10px;border-radius:2px;font-weight:600;color:var(--champ-onlight);letter-spacing:.05em;text-transform:uppercase;font-size:12px}
+.add:hover{background:var(--champ);color:#0a0a0b}
+.banner{margin:32px 0;background:#000;color:#fff;padding:36px;border-radius:2px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--champ)}
+.banner h2{margin:0;color:#fff}.banner p{color:var(--champ-ondark);margin:4px 0 0;letter-spacing:.03em}
+.footer{background:#000;color:#fff;margin-top:44px;padding:48px 5% 30px;border-top:1px solid var(--line)}
+.footergrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+.footer h2{color:#fff;font-weight:400}.footer a{display:block;color:#a9a59a;margin:9px 0;text-decoration:none;font-size:13.5px}.footer a:hover{color:var(--champ-ondark)}
+.footer b{color:var(--champ-ondark);font-family:Georgia,serif;font-weight:400;letter-spacing:.06em;text-transform:uppercase;font-size:12.5px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:20}
+.modal.open{display:flex}
+.modalbox{background:var(--surface);width:min(900px,94%);max-height:90vh;overflow:auto;border-radius:2px;padding:24px;border:1px solid var(--line);color:var(--ink)}
+.modalbox h2{color:var(--ink)}
+.close{float:right;border:0;background:none;font-size:25px;color:var(--muted)}
+.cartrow{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:12px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat{background:var(--surface-2);padding:16px;border-radius:2px;border:1px solid var(--line)}
+.stat h2{color:var(--champ-onlight);font-size:21px;margin:6px 0 0}
+.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.formgrid input,.formgrid select,.fullinput{width:100%;padding:10px;border:1px solid var(--line);border-radius:2px;background:var(--surface-2);color:var(--ink)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.tab{border:1px solid var(--line);background:transparent;padding:9px 13px;border-radius:2px;font-size:12.5px;font-weight:400;letter-spacing:.03em;color:var(--ink)}
+.tab.active{background:var(--champ-ondark);color:#0a0a0b;border-color:var(--champ-ondark)}
+.pill{display:inline-block;padding:4px 9px;border-radius:2px;background:transparent;border:1px solid var(--champ);color:var(--champ-onlight);font-size:11.5px;font-weight:400;letter-spacing:.03em}
+.ok{color:var(--ok);font-weight:700}.bad{color:var(--danger);font-weight:700}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.mini{font-size:12px;color:var(--muted)}
+.notice{padding:12px 14px;background:var(--surface-2);border:1px solid var(--champ);border-radius:2px;margin:10px 0;font-size:13px;color:var(--ink)}
+@media(max-width:850px){.top{font-size:11px}.header{flex-wrap:wrap;gap:10px}.search{order:3;flex-basis:100%;max-width:none}.actions{font-size:12px}.nav{overflow:auto;gap:16px}.hero{margin:8px;min-height:300px;padding:40px 25px}.hero h1{font-size:38px}.trust{grid-template-columns:repeat(2,1fr);gap:15px}.trust div:nth-child(2):after{display:none}.categories{grid-template-columns:repeat(4,1fr)}.layout{grid-template-columns:1fr}.side{display:none}.products{grid-template-columns:repeat(2,1fr)}.pic{height:145px;font-size:55px}.footergrid{grid-template-columns:1fr 1fr}.banner{display:block}.hero:after,.hero:before{display:none}.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.top{display:none}.logo{font-size:19px}.actions{gap:6px}.hero h1{font-size:31px}.hero p{font-size:14px}.categories{gap:8px}.cat{padding:8px}.cat .icon{font-size:23px}.cat small{font-size:10px}.products{gap:8px}.product{padding:8px}.pic{height:125px}.footergrid{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.modalbox{padding:15px}.trustline{font-size:10.5px;line-height:1.7;white-space:normal}}
+@media print{body *{visibility:hidden}#printArea,#printArea *{visibility:visible}#printArea{position:absolute;top:0;left:0;width:100%;padding:20px;color:#000}#printArea table{width:100%;border-collapse:collapse}#printArea td,#printArea th{border-bottom:1px solid #ccc;padding:6px;text-align:left}}
+</style>
+</head>
+<body>
+<header class="header"><div class="logo"><span class="crest">♕</span>MGR <span>LIFE STYLE</span><div class="tag">Admin Panel</div></div></header>
+<main class="container" style="text-align:center;padding:60px 18px">
+<h1 style="font-family:Georgia,serif;font-weight:400">Admin Panel</h1>
+<p class="mini">Products, orders, partners, reports — local PC backend sathe manage karo.</p>
+<button id="shellBtn" class="primary" onclick="openAdminPanel()">Admin Login</button>
+</main>
+<div id="modal" class="modal"><div class="modalbox"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+<div id="printArea"></div>
+<script>
+
+const defaultCats=[
+{c:'Home Cleaning Products',icon:'🧽',label:'Home Cleaning'},
+{c:'Clothes',icon:'👕',label:'Clothes'},
+{c:'Perfume',icon:'🧴',label:'Perfume'},
+{c:'Candles',icon:'🕯️',label:'Candles'},
+{c:'Jewellery',icon:'💎',label:'Jewellery'},
+{c:'Cosmetics',icon:'💄',label:'Cosmetics'},
+{c:'Home Care',icon:'🏠',label:'Home Care'},
+{c:'Wellness',icon:'🌿',label:'Wellness'},
+{c:'Electronics',icon:'🎧',label:'Electronics'}
+];
+let CATS=JSON.parse(localStorage.getItem('mgr_offline_categories')||'null')||defaultCats;
+function saveCats(){localStorage.setItem('mgr_offline_categories',JSON.stringify(CATS))}
+let SUBS=JSON.parse(localStorage.getItem('mgr_offline_subcats')||'null')||[];
+function saveSubs(){localStorage.setItem('mgr_offline_subcats',JSON.stringify(SUBS))}
+function allSubsFor(cat){const fromSubs=SUBS.filter(s=>s.cat===cat).map(s=>s.sub);const fromProducts=products.filter(p=>p.c===cat&&p.sub).map(p=>p.sub);return [...new Set([...fromSubs,...fromProducts])]}
+const defaultProducts=[
+{id:101,n:'Detergent Liquid 500gm',c:'Home Cleaning Products',sub:'Detergent Liquid',p:0,cost:0,e:'🧴',r:5,stock:20},
+{id:102,n:'Dish Wash Liquid 500gm',c:'Home Cleaning Products',sub:'Dish Wash Liquid',p:0,cost:0,e:'🧴',r:5,stock:20},
+{id:103,n:'Hand Wash Liquid 500gm',c:'Home Cleaning Products',sub:'Hand Wash Liquid',p:0,cost:0,e:'🧼',r:5,stock:20},
+{id:104,n:'Car Wash Liquid 500gm',c:'Home Cleaning Products',sub:'Car Wash Liquid',p:0,cost:0,e:'🚗',r:5,stock:20},
+{id:105,n:'Bathroom Cleaning 500gm',c:'Home Cleaning Products',sub:'Bathroom Cleaning',p:0,cost:0,e:'🚿',r:5,stock:20},
+{id:106,n:'Toilet Cleaner Liquid 500gm',c:'Home Cleaning Products',sub:'Toilet Cleaner Liquid',p:0,cost:0,e:'🚽',r:5,stock:20},
+{id:107,n:'Glass Cleaner Liquid 500gm',c:'Home Cleaning Products',sub:'Glass Cleaner Liquid',p:0,cost:0,e:'🪟',r:5,stock:20},
+{id:108,n:'Floor Cleaner Liquid 500gm',c:'Home Cleaning Products',sub:'Floor Cleaner Liquid',p:0,cost:0,e:'🧹',r:5,stock:20},
+{id:109,n:'Phynole Liquid 500gm/1 Liter',c:'Home Cleaning Products',sub:'Phynole Liquid',p:0,cost:0,e:'🧴',r:5,stock:20},
+{id:1,n:'Premium Detergent Powder 1kg',c:'Home Cleaning Products',sub:'Detergent Powder',p:199,cost:120,e:'🧴',r:4.8,stock:50},
+{id:2,n:'Quality Cotton Shirt',c:'Clothes',p:499,cost:280,e:'👕',r:4.7,stock:30},
+{id:3,n:'Luxury Perfume 100ml',c:'Perfume',p:899,cost:500,e:'🧴',r:4.9,stock:20},
+{id:4,n:'24K Gold Plated Necklace',c:'Jewellery',p:1299,cost:700,e:'💎',r:4.7,stock:15},
+{id:5,n:'Beauty Cosmetics Kit',c:'Cosmetics',p:699,cost:360,e:'💄',r:4.8,stock:25},
+{id:6,n:'Premium Home Care Set',c:'Home Care',p:599,cost:300,e:'🏠',r:4.6,stock:18},
+{id:7,n:'Wellness Essentials',c:'Wellness',p:799,cost:420,e:'🌿',r:4.7,stock:22},
+{id:8,n:'Wireless Lifestyle Headphones',c:'Electronics',p:1599,cost:900,e:'🎧',r:4.6,stock:12}
+];
+let products=JSON.parse(localStorage.getItem('mgr_offline_products')||'null')||defaultProducts;
+let cart=JSON.parse(localStorage.getItem('mgr_offline_cart')||'[]');
+let wishlist=JSON.parse(localStorage.getItem('mgr_offline_wishlist')||'[]');
+let partners=JSON.parse(localStorage.getItem('mgr_offline_partners')||'null')||[
+{name:'Karan',share:40,paid:0},{name:'Reena',share:30,paid:0},{name:'Partner 3',share:30,paid:0}
+];
+let orders=JSON.parse(localStorage.getItem('mgr_offline_orders')||'[]');
+let expenses=JSON.parse(localStorage.getItem('mgr_offline_expenses')||'[]');
+let purchases=JSON.parse(localStorage.getItem('mgr_offline_purchases')||'[]');
+let customers=JSON.parse(localStorage.getItem('mgr_offline_customers')||'[]');
+let settings=JSON.parse(localStorage.getItem('mgr_offline_settings')||'null')||{firm:'MGR LIFESTYLE',mobile:'7624006324',email:'MGRLIFESTLYE0@gmail.com',free:999};
+let adminSaveQueue=Promise.resolve();
+async function backendRequest(path,options={}){
+ const headers={'Content-Type':'application/json'};
+ if(options.token)headers.Authorization='Bearer '+options.token;
+ const response=await fetch(path,{method:options.method||'GET',headers,body:options.body?JSON.stringify(options.body):undefined});
+ const result=await response.json().catch(()=>({error:'Invalid response from local backend'}));
+ if(!response.ok)throw new Error(result.error||'Local backend request failed');
+ return result;
+}
+function adminStatePayload(){return {products,cats:CATS,subs:SUBS,partners,orders,expenses,purchases,settings}}
+function save(){
+ localStorage.setItem('mgr_offline_products',JSON.stringify(products));
+ localStorage.setItem('mgr_offline_partners',JSON.stringify(partners));
+ localStorage.setItem('mgr_offline_orders',JSON.stringify(orders));
+ localStorage.setItem('mgr_offline_expenses',JSON.stringify(expenses));
+ localStorage.setItem('mgr_offline_purchases',JSON.stringify(purchases));
+ localStorage.setItem('mgr_offline_customers',JSON.stringify(customers));
+ localStorage.setItem('mgr_offline_categories',JSON.stringify(CATS));
+ localStorage.setItem('mgr_offline_subcats',JSON.stringify(SUBS));
+ const token=sessionStorage.getItem('mgr_admin_token');
+ if(token){
+  const payload=adminStatePayload();
+  adminSaveQueue=adminSaveQueue.then(()=>backendRequest('/api/admin/state',{method:'PUT',token,body:payload}))
+   .catch(error=>alert('Backend save failed: '+error.message));
+ }
+}
+function money(x){return '₹'+Number(x||0).toLocaleString('en-IN')}
+let mgrTapCount=0,mgrTapTimer=null;
+function mgrSecretTap(){
+ mgrTapCount++;
+ clearTimeout(mgrTapTimer);
+ mgrTapTimer=setTimeout(()=>{mgrTapCount=0;const el=document.getElementById('mgrTap');if(el)el.style.opacity='1'},3000);
+ const el=document.getElementById('mgrTap');
+ if(el){el.style.opacity='0.5';setTimeout(()=>{el.style.opacity='1'},120)}
+ if(mgrTapCount>=5){mgrTapCount=0;clearTimeout(mgrTapTimer);openAdminLogin()}
+}
+function adminCategories(selectedCategory=CATS[0]?.c){openModal(`<h2>Category Management</h2>${adminTabs('Categories')}<h3>📂 Categories</h3><div class="card" style="padding:12px"><div class="formgrid"><input id="ccn" placeholder="Category name (e.g. Candles)"><input id="cci" placeholder="Emoji icon (e.g. 🕯️)"></div><button class="primary" onclick="addCategoryOffline()">Add Category</button></div>${CATS.map((x,i)=>{const n=products.filter(p=>p.c===x.c).length;return `<div class="row"><span>${x.icon} <b>${x.label}</b><br><span class="mini">${n} product(s)</span></span><button id="delcat${i}" onclick="confirmDeleteCategory(${i})">Delete</button></div>`}).join('')}<div class="notice">✅ Tap Delete twice to confirm. Deleting a category does not delete its products — they stay in Product Management, you can move them to another category there.</div>
+<hr style="margin:22px 0;border:none;border-top:1px solid var(--line)">
+<h3>📂 Sub-Categories</h3>
+<div class="card" style="padding:12px"><div class="formgrid"><select id="scc" onchange="renderAdminSubcategories(this.value)">${CATS.map(x=>`<option value="${x.c}"${x.c===selectedCategory?' selected':''}>${x.label}</option>`).join('')}</select><input id="scn" placeholder="Sub-category name (e.g. Detergent Liquid)"></div><button class="primary" onclick="addSubcatOffline()">Add Sub-Category</button></div>
+<div id="adminSubcategoryList">${adminSubcategoryHTML(selectedCategory)}</div>
+<p class="mini">Deleting a sub-category does not delete its products — their sub-category field is simply cleared.</p>`)}
+function adminSubcategoryHTML(cat){const category=CATS.find(x=>x.c===cat);if(!category)return '<p class="mini">No categories available.</p>';const subs=allSubsFor(cat);if(!subs.length)return `<p class="mini">No sub-categories in ${category.label}.</p>`;return `<div style="margin-top:10px"><b>${category.icon} ${category.label}</b>${subs.map(s=>{const n=products.filter(p=>p.c===cat&&p.sub===s).length;const key=(cat+'|'+s).replace(/[^a-zA-Z0-9]/g,'_');return `<div class="row"><span>📂 ${s}<br><span class="mini">${n} product(s)</span></span><button id="delsub_${key}" onclick="confirmDeleteSubcat('${cat.replace(/'/g,"\\'")}','${s.replace(/'/g,"\\'")}','${key}')">Delete</button></div>`}).join('')}</div>`}
+function renderAdminSubcategories(cat){const list=document.getElementById('adminSubcategoryList');if(list)list.innerHTML=adminSubcategoryHTML(cat)}
+function addSubcatOffline(){const cat=document.getElementById('scc').value;const sub=document.getElementById('scn').value.trim();if(!sub)return alert('Sub-category name required');if(allSubsFor(cat).some(s=>s.toLowerCase()===sub.toLowerCase()))return alert('Sub-category already exists in this category');SUBS.push({cat,sub});saveSubs();save();adminCategories(cat)}
+function confirmDeleteSubcat(cat,sub,key){const btn=document.getElementById('delsub_'+key);if(!btn)return;if(btn.dataset.confirm==='1'){deleteSubcatOffline(cat,sub);return}btn.dataset.confirm='1';btn.textContent='Confirm?';btn.classList.add('bad');setTimeout(()=>{if(btn){btn.dataset.confirm='0';btn.textContent='Delete';btn.classList.remove('bad')}},3000)}
+function deleteSubcatOffline(cat,sub){SUBS=SUBS.filter(s=>!(s.cat===cat&&s.sub===sub));saveSubs();products.forEach(p=>{if(p.c===cat&&p.sub===sub)p.sub=''});save();adminCategories(cat)}
+function confirmDeleteCategory(i){const btn=document.getElementById('delcat'+i);if(!btn)return;if(btn.dataset.confirm==='1'){deleteCategoryOffline(i);return}btn.dataset.confirm='1';btn.textContent='Confirm?';btn.classList.add('bad');setTimeout(()=>{if(btn){btn.dataset.confirm='0';btn.textContent='Delete';btn.classList.remove('bad')}},3000)}
+function addCategoryOffline(){const label=document.getElementById('ccn').value.trim();if(!label)return alert('Category name required');const icon=document.getElementById('cci').value.trim()||'📦';if(CATS.some(x=>x.c.toLowerCase()===label.toLowerCase()))return alert('Category already exists');CATS.push({c:label,icon,label});saveCats();save();renderCategoryUI();adminCategories()}
+function deleteCategoryOffline(i){CATS.splice(i,1);saveCats();save();renderCategoryUI();adminCategories()}
+function adminDashboard(){const sales=orders.reduce((s,o)=>s+(o.paid?o.total:0),0),cost=orders.reduce((s,o)=>s+(o.paid?o.items.reduce((a,x)=>a+(products.find(p=>p.id===x.id)?.cost||0)*x.qty,0):0),0),exp=expenses.reduce((s,e)=>s+e.amount,0),profit=sales-cost-exp;openModal(`<h2>Admin Dashboard</h2>${adminTabs('Dashboard')}<div class="grid"><div class="stat">Sales<h2>${money(sales)}</h2></div><div class="stat">Costs<h2>${money(cost)}</h2></div><div class="stat">Expenses<h2>${money(exp)}</h2></div><div class="stat">Net Profit<h2>${money(profit)}</h2></div><div class="stat">Orders<h2>${orders.length}</h2></div><div class="stat">Customers<h2>${customers.length}</h2></div></div><div class="notice">Connected to the local PC backend. Data is stored in the local SQLite database.</div>`)}
+function adminCustomers(){openModal(`<h2>Customers</h2>${adminTabs('Customers')}${customers.map(c=>`<div class="row"><span>${c.name}</span><span class="mini">${c.u}</span></div>`).join('')||'<p>No customer accounts yet. Customer signup is not required for offline order demo.</p>'}`)}
+function adminReports(){const paid=orders.filter(o=>o.paid),sales=paid.reduce((s,o)=>s+o.total,0),profit=paid.reduce((s,o)=>s+o.netProfit,0),exp=expenses.reduce((s,e)=>s+e.amount,0);openModal(`<h2>Reports</h2>${adminTabs('Reports')}<div class="grid"><div class="stat">Paid Sales<h2>${money(sales)}</h2></div><div class="stat">Gross Profit<h2>${money(profit)}</h2></div><div class="stat">Expenses<h2>${money(exp)}</h2></div><div class="stat">Paid Orders<h2>${paid.length}</h2></div></div><h3>Partner Earnings Split</h3><p class="mini">Direct website orders: 50/50 Karan-Reena. Working-partner orders: 50% to that partner, 25% each to Karan &amp; Reena.</p>${partners.map((p,i)=>`<div class="row"><span>${p.name}</span><span>${money(totalEarningsFor(i))}</span></div>`).join('')}`)}
+function adminProducts(){const subOptions=[...new Set([...SUBS.map(s=>s.sub),...products.map(p=>p.sub)].filter(Boolean))];openModal(`<h2>Product Management</h2>${adminTabs('Products')}<div class="card" style="padding:12px"><div class="formgrid"><input id="pn" placeholder="Product name"><input id="pp" type="number" placeholder="Selling price"><input id="pc" type="number" placeholder="Cost (wholesale buy price)"><input id="pw" type="number" placeholder="Wholesale price"><input id="ps" type="number" placeholder="Stock"><input id="pe" placeholder="Emoji"><input id="pca" list="catlist" placeholder="Category"><datalist id="catlist">${CATS.map(x=>`<option value="${x.c}">`).join('')}</datalist><input id="psub" list="sublist" placeholder="Sub-category (optional, e.g. Detergent Liquid)"><datalist id="sublist">${subOptions.map(s=>`<option value="${s}">`).join('')}</datalist></div><button class="primary" onclick="addProductOffline()">Add Product</button></div>${products.map(p=>`<div class="row"><span>${p.e} <b>${p.n}</b><br><span class="mini">${p.c}${p.sub?' › '+p.sub:''} • Sell ${money(p.p)}${p.wholesale?' • Wholesale '+money(p.wholesale):''} • Stock ${p.stock}</span></span><button id="delbtn${p.id}" onclick="confirmDeleteProduct(${p.id})">Delete</button></div>`).join('')}`)}
+function confirmDeleteProduct(id){const btn=document.getElementById('delbtn'+id);if(!btn)return;if(btn.dataset.confirm==='1'){deleteProductOffline(id);return}btn.dataset.confirm='1';btn.textContent='Confirm?';btn.classList.add('bad');setTimeout(()=>{if(btn){btn.dataset.confirm='0';btn.textContent='Delete';btn.classList.remove('bad')}},3000)}
+function addProductOffline(){const n=document.getElementById('pn').value.trim();if(!n)return alert('Name required');products.push({id:Date.now(),n,c:document.getElementById('pca').value||'Other',sub:document.getElementById('psub').value.trim(),p:+document.getElementById('pp').value||0,cost:+document.getElementById('pc').value||0,wholesale:+document.getElementById('pw').value||0,e:document.getElementById('pe').value||'📦',r:5,stock:+document.getElementById('ps').value||0});save();adminProducts()}
+function deleteProductOffline(id){products=products.filter(p=>p.id!==id);save();adminProducts()}
+function adminOrders(){openModal(`<h2>Order Management</h2>${adminTabs('Orders')}${orders.length?orders.map((o,i)=>`<div class="card" style="padding:12px"><b>#${o.id}</b> — ${o.customer}${o.partnerName?` <span class="pill">via ${o.partnerName}</span>`:''}<br>Total: ${money(o.total)} • ${o.status}<br><span class="mini">${o.created}</span><br>${!o.paid?`<button class="primary" onclick="markPaid(${i})">Mark Demo Paid</button> <button onclick="printPartnerBill('${o.id}')">🧾 Bill</button>`:`<span class="ok">✓ Paid • Profit ${money(o.netProfit)}</span> <button onclick="printPartnerBill('${o.id}')">🧾 Bill</button>`}</div>`).join(''):'<p>No orders yet.</p>'}`)}
+function markPaid(i){const o=orders[i];if(o.paid)return;let cost=0;o.items.forEach(x=>{const p=products.find(y=>y.id===x.id);cost+=(p?.cost||0)*x.qty});o.paid=true;o.status='Paid / Confirmed';o.netProfit=o.total-cost;save();adminOrders()}
+function adminPartners(){const total=partners.reduce((s,p)=>s+Number(p.share),0);openModal(`<h2>Partner Management</h2>${adminTabs('Partners')}
+<h3>🌐 Website Order Profit Split</h3>
+<div class="card" style="padding:14px;border:1px solid var(--champ)">
+<b>🌐 Direct Website Orders</b> <span class="mini">(No partner involved)</span>
+<table style="width:100%;border-collapse:collapse;margin-top:8px"><tr style="border-bottom:1px solid var(--line)"><td style="padding:6px 0"><b>Split</b></td><td></td></tr><tr style="border-bottom:1px solid var(--line)"><td style="padding:6px 0">Karan</td><td style="padding:6px 0;text-align:right">50%</td></tr><tr><td style="padding:6px 0">Reena</td><td style="padding:6px 0;text-align:right">50%</td></tr></table>
+</div>
+<div class="card" style="padding:14px;border:1px solid var(--champ);margin-top:12px">
+<b>🤝 Working Partner Orders</b> <span class="mini">(3rd partner onwards)</span>
+<table style="width:100%;border-collapse:collapse;margin-top:8px"><tr style="border-bottom:1px solid var(--line)"><td style="padding:6px 0"><b>Split</b></td><td></td></tr><tr style="border-bottom:1px solid var(--line)"><td style="padding:6px 0">Karan</td><td style="padding:6px 0;text-align:right">25%</td></tr><tr style="border-bottom:1px solid var(--line)"><td style="padding:6px 0">Reena</td><td style="padding:6px 0;text-align:right">25%</td></tr><tr><td style="padding:6px 0">Working Partner</td><td style="padding:6px 0;text-align:right">50%</td></tr></table>
+</div>
+<p class="mini" style="margin-top:8px">This is calculated automatically from paid orders — it does not use the Membership % below.</p>
+<h4 style="margin-bottom:6px">Current Earnings (as per split rule)</h4>
+${partners.map((p,i)=>`<div class="row"><span>${p.name}</span><span>${money(totalEarningsFor(i))}</span></div>`).join('')}
+
+<hr style="margin:22px 0;border:none;border-top:1px solid var(--line)">
+
+<h3>🤝 Partnership Membership Shares</h3>
+<div class="card" style="padding:14px;border:1px solid var(--champ)">
+<p class="mini" style="margin-top:0">This represents each partner's ownership/equity % in the company — separate from the website order profit split above.</p>
+<p>Membership total: <span class="${total===100?'ok':'bad'}">${total}% ${total===100?'✓':'— must equal 100%'}</span></p>
+${partners.map((p,i)=>`<div class="row"><input id="pnm${i}" value="${p.name}" style="flex:1;padding:9px"><input id="psh${i}" type="number" value="${p.share}" style="width:75px;padding:9px"> %<button id="delptr${i}" onclick="confirmDeletePartner(${i})">Delete</button></div>`).join('')}
+<button class="primary" onclick="savePartnerShares()" style="margin-top:10px">Save Membership Shares</button>
+</div>
+<div class="card" style="padding:12px;margin-top:14px"><div class="formgrid"><input id="pnn" placeholder="New partner name"><input id="pns" type="number" placeholder="Membership Share %"></div><button class="primary" onclick="addPartnerOffline()">Add Partner</button></div>
+<p class="mini">Total membership shares must equal 100% before saving.</p>`)}
+function addPartnerOffline(){const n=document.getElementById('pnn').value.trim();if(!n)return alert('Partner name required');const s=Number(document.getElementById('pns').value)||0;partners.push({name:n,share:s,paid:0});save();adminPartners()}
+function deletePartnerOffline(i){partners.splice(i,1);save();adminPartners()}
+function confirmDeletePartner(i){const btn=document.getElementById('delptr'+i);if(!btn)return;if(btn.dataset.confirm==='1'){deletePartnerOffline(i);return}btn.dataset.confirm='1';btn.textContent='Confirm?';btn.classList.add('bad');setTimeout(()=>{if(btn){btn.dataset.confirm='0';btn.textContent='Delete';btn.classList.remove('bad')}},3000)}
+function savePartnerShares(){let total=0;partners.forEach((p,i)=>{p.name=document.getElementById('pnm'+i).value||p.name;p.share=Number(document.getElementById('psh'+i).value)||0;total+=p.share});if(total!==100)return alert('Partner shares must total exactly 100%');save();adminPartners()}
+function adminExpenses(){openModal(`<h2>Expenses</h2>${adminTabs('Expenses')}<div class="formgrid"><input id="et" placeholder="Expense title"><input id="ea" type="number" placeholder="Amount"></div><button class="primary" onclick="addExpenseOffline()">Add Expense</button>${expenses.map((e,i)=>`<div class="row"><span>${e.title}<br><span class="mini">${new Date(e.date).toLocaleString()}</span></span><b>${money(e.amount)}</b></div>`).join('')||'<p>No expenses.</p>'}`)}
+function addExpenseOffline(){const title=document.getElementById('et').value.trim();const amount=Number(document.getElementById('ea').value);if(!title||!amount)return alert('Enter title and amount');expenses.unshift({title,amount,date:Date.now()});save();adminExpenses()}
+function earningsForOrder(o,partnerIndex){
+ // Business rule: direct website orders split 50/50 between partners[0] & partners[1] (Karan & Reena).
+ // Orders brought in by a working partner (index>=2) split 50% to that working partner,
+ // and the remaining 50% split 25/25 between partners[0] & partners[1].
+ const profit=o.netProfit||0;
+ const isWorkingPartnerOrder=!!o.partnerName && partners.findIndex(p=>p.name===o.partnerName)>=2;
+ if(isWorkingPartnerOrder){
+  const workingIdx=partners.findIndex(p=>p.name===o.partnerName);
+  if(partnerIndex===workingIdx) return profit*0.5;
+  if(partnerIndex===0||partnerIndex===1) return profit*0.25;
+  return 0;
+ } else {
+  if(partnerIndex===0||partnerIndex===1) return profit*0.5;
+  return 0;
+ }
+}
+function totalEarningsFor(partnerIndex){return orders.filter(o=>o.paid).reduce((s,o)=>s+earningsForOrder(o,partnerIndex),0)}
+function printPartnerBill(orderId){
+ const o=orders.find(x=>x.id===orderId);if(!o)return;
+ const rows=o.items.map(x=>{const p=products.find(y=>y.id===x.id);const price=p?p.p:0;return `<tr><td>${p?p.e+' '+p.n:'Item'}</td><td>${x.qty}</td><td>${money(price)}</td><td>${money(price*x.qty)}</td></tr>`}).join('');
+ const bill=`<div style="max-width:600px;margin:auto;font-family:Georgia,serif"><h1 style="margin-bottom:0">MGR LIFE STYLE</h1><p style="margin-top:4px;color:#555">Support: 7624006324 • MGRLIFESTLYE0@gmail.com</p><hr><h2>Invoice — #${o.id}</h2><p>Date: ${o.created}</p><p>Customer: <b>${o.customer}</b>${o.phone?' • '+o.phone:''}</p>${o.address?`<p>Address: ${o.address}</p>`:''}${o.partnerName?`<p>Booked by Partner: <b>${o.partnerName}</b></p>`:''}<table><tr><th>Item</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr>${rows}</table><h3 style="text-align:right">Total: ${money(o.total)}</h3><p style="color:#555">Status: ${o.status}</p></div>`;
+ document.getElementById('printArea').innerHTML=bill;
+ openModal(`<h2>🧾 Bill Preview</h2>${bill}<button class="primary" onclick="window.print()">🖨 Print / Save as PDF</button>`);
+}
+function showInfo(title,text){openModal(`<h2>${title}</h2><p>${text}</p>`)}
+function openSettings(){const s=settings;openModal(`<h2>⚙ Business Settings</h2>${adminTabs('Settings')}<div class="formgrid"><label class="mini">Firm Name<input id="sfirm" class="fullinput" value="${s.firm}"></label><label class="mini">Support Mobile<input id="smob" class="fullinput" value="${s.mobile}"></label><label class="mini">Business Email<input id="semail" class="fullinput" value="${s.email}"></label><label class="mini">Free Shipping Above<input id="sfree" class="fullinput" type="number" value="${s.free}"></label></div><div class="formgrid" style="margin-top:8px"><label class="mini">India Gateway<input class="fullinput" value="Razorpay (Primary) + PayU (Secondary)" readonly></label><label class="mini">COD<input class="fullinput" value="No" readonly></label><label class="mini">Worldwide Shipping<input class="fullinput" value="Yes" readonly></label><label class="mini">Tax<input class="fullinput" value="GST + International Tax/Duty" readonly></label></div><label class="mini">Countries<input class="fullinput" value="India, USA, UK, UAE, Canada, Australia, Worldwide" readonly></label><br><button class="primary" onclick="saveSettings()">Save Settings</button><div class="notice">Business data is stored on this PC. Live payment gateways are not configured.</div>`)}
+function saveSettings(){settings={firm:document.getElementById('sfirm').value,mobile:document.getElementById('smob').value,email:document.getElementById('semail').value,free:Number(document.getElementById('sfree').value)||0};localStorage.setItem('mgr_offline_settings',JSON.stringify(settings));save();openSettings()}
+function openModal(content){document.getElementById('modalContent').innerHTML=content;document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+
+function renderCategoryUI(){}
+function renderProducts(){}
+
+/* ===== Data Sync (export / import between Store and Admin files) ===== */
+function buildSnapshot(from){
+ let settings=null;try{settings=JSON.parse(localStorage.getItem('mgr_offline_settings')||'null')}catch(e){}
+ return {app:'MGR_LIFE_STYLE',v:1,from,ts:new Date().toISOString(),data:{products,cats:CATS,subs:SUBS,partners,orders,expenses,purchases,customers,settings}};
+}
+function encodeSnapshot(from){return 'MGRSYNC1:'+btoa(unescape(encodeURIComponent(JSON.stringify(buildSnapshot(from)))))}
+function decodeSnapshot(text){
+ text=(text||'').trim();if(!text)throw new Error('Empty');
+ if(text.startsWith('MGRSYNC1:')){return JSON.parse(decodeURIComponent(escape(atob(text.slice(9).replace(/\s+/g,'')))))}
+ const i=text.indexOf('{');return JSON.parse(text.slice(i));
+}
+async function applySnapshot(snap,role){
+ if(!snap||snap.app!=='MGR_LIFE_STYLE'||!snap.data)throw new Error('Not a MGR LIFE STYLE sync data');
+ const d=snap.data;let msg=[];
+ if(role==='admin'){
+  if(snap.from==='admin'){
+   await backendRequest('/api/admin/import',{method:'POST',token:sessionStorage.getItem('mgr_admin_token'),body:{...d,purchases:d.purchases||[],settings:d.settings||settings}});
+   await loadAdminState();
+   return 'Old Admin products, categories, accounts, orders and expenses imported';
+  }
+  let added=0;
+  (d.orders||[]).forEach(o=>{if(!orders.find(x=>x.id===o.id)){orders.unshift(o);(o.items||[]).forEach(it=>{const p=products.find(y=>y.id===it.id);if(p)p.stock=Math.max(0,p.stock-it.qty)});added++}});
+  let newC=0;(d.customers||[]).forEach(c=>{if(!customers.find(x=>x.u===c.u)){customers.push(c);newC++}});
+  save();msg.push(added+' new order(s) received',newC+' new customer(s)');
+ } else {
+  const incomingIds=new Set((d.orders||[]).map(o=>o.id));
+  const localOnly=orders.filter(o=>!incomingIds.has(o.id));
+  if(Array.isArray(d.products))products=d.products;
+  if(Array.isArray(d.cats))CATS=d.cats;
+  if(Array.isArray(d.subs))SUBS=d.subs;
+  if(Array.isArray(d.partners))partners=d.partners;
+  if(d.settings)localStorage.setItem('mgr_offline_settings',JSON.stringify(d.settings));
+  orders=[...localOnly,...(d.orders||[])];
+  localOnly.forEach(o=>(o.items||[]).forEach(it=>{const p=products.find(y=>y.id===it.id);if(p)p.stock=Math.max(0,p.stock-it.qty)}));
+  save();saveCats();saveSubs();
+  if(typeof renderCategoryUI==='function')renderCategoryUI();if(typeof renderProducts==='function')renderProducts();
+  msg.push('Products, categories & partners updated',(d.orders||[]).length+' order record(s) synced');
+ }
+ return msg.join(' • ');
+}
+function syncPanelHTML(role){
+ const code=encodeSnapshot(role);
+ return `<div class="notice">Store અને Admin હવે આ PCના એક જ SQLite backendનો ઉપયોગ કરે છે; રોજિંદા ઉપયોગમાં manual sync જરૂરી નથી. Download backup માટે છે. જૂની offline Admin backup સંપૂર્ણ restore કરે છે; જૂની Store backup orders/customers ઉમેરે છે.</div>
+ <h3>📤 Download business-data backup</h3>
+ <button class="primary" onclick="syncDownload('${role}')">⬇ Download file</button> <button class="tab" onclick="syncCopy()">📋 Copy code</button>
+ <textarea id="syncOut" class="fullinput" rows="3" readonly style="margin-top:8px;font-size:11px">${code}</textarea>
+ <h3 style="margin-top:18px">📥 Import old Store orders/customers</h3>
+ <input type="file" id="syncFile" accept=".json,.txt,application/json,text/plain" class="fullinput" onchange="syncImportFile('${role}')">
+ <p class="mini" style="margin:6px 0">ya code paste karo:</p>
+ <textarea id="syncIn" class="fullinput" rows="3" placeholder="MGRSYNC1:..." style="font-size:11px"></textarea>
+ <button class="primary" style="margin-top:8px" onclick="syncImportText('${role}')">Import data</button>
+ <p id="syncMsg" class="mini" style="margin-top:8px"></p>`;
+}
+function syncDownload(role){
+ try{const blob=new Blob([JSON.stringify(buildSnapshot(role),null,1)],{type:'application/json'});const a=document.createElement('a');const d=new Date();const pad=n=>String(n).padStart(2,'0');
+  a.href=URL.createObjectURL(blob);a.download='mgr-sync-'+role+'-'+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+pad(d.getHours())+pad(d.getMinutes())+'.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+  syncSay('File download thai rahi che. Na thay to "Copy code" vapro.')}catch(e){syncSay('Download na thayu — "Copy code" vapro.',true)}
+}
+function syncCopy(){
+ const ta=document.getElementById('syncOut');ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
+ let ok=false;try{ok=document.execCommand('copy')}catch(e){}
+ if(!ok&&navigator.clipboard){navigator.clipboard.writeText(ta.value).then(()=>syncSay('Code copy thai gayo ✓'),()=>syncSay('Copy na thayu — upar na box ma long-press karine copy karo.',true));return}
+ syncSay(ok?'Code copy thai gayo ✓':'Copy na thayu — upar na box ma long-press karine copy karo.',!ok);
+}
+async function syncImportText(role){try{const msg=await applySnapshot(decodeSnapshot(document.getElementById('syncIn').value),role);syncSay('✓ Import thayu: '+msg);syncAfter(role)}catch(e){syncSay('Import na thayu: '+e.message,true)}}
+function syncImportFile(role){
+ const f=document.getElementById('syncFile').files[0];if(!f)return;const r=new FileReader();
+ r.onload=async()=>{try{const msg=await applySnapshot(decodeSnapshot(String(r.result)),role);syncSay('✓ Import thayu: '+msg);syncAfter(role)}catch(e){syncSay('Import na thayu: '+e.message,true)}};
+ r.onerror=()=>syncSay('File vanchay nahi',true);r.readAsText(f);
+}
+function syncSay(t,bad){const el=document.getElementById('syncMsg');if(el){el.textContent=t;el.className='mini '+(bad?'bad':'ok')}}
+function syncAfter(role){}
+function reloadFromStorage(){
+ try{const g=(k,d)=>{const v=localStorage.getItem(k);return v?JSON.parse(v):d};
+  products=g('mgr_offline_products',products);partners=g('mgr_offline_partners',partners);orders=g('mgr_offline_orders',orders);expenses=g('mgr_offline_expenses',expenses);customers=g('mgr_offline_customers',customers);CATS=g('mgr_offline_categories',CATS);SUBS=g('mgr_offline_subcats',SUBS);
+  if(typeof renderCategoryUI==='function'&&document.getElementById('products')){renderCategoryUI();renderProducts()}
+ }catch(e){}
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)reloadFromStorage()});
+window.addEventListener('focus',reloadFromStorage);
+
+function adminAuthed(){return Boolean(sessionStorage.getItem('mgr_admin_token'))}
+function setAdminAuthed(token){if(token)sessionStorage.setItem('mgr_admin_token',token);else sessionStorage.removeItem('mgr_admin_token')}
+function openAdminLogin(){openModal(`<h2>🔐 MGR LIFE STYLE Admin</h2><label class="mini">Username<input id="au" class="fullinput" autocomplete="username"></label><label class="mini">Password<input id="ap" class="fullinput" type="password" style="margin-top:8px" autocomplete="current-password"></label><button class="primary" style="margin-top:12px" onclick="adminLogin()">Secure Login</button>`)}
+function openAdminSetup(){openModal(`<h2>🔐 Create Admin Account</h2><p>First-time setup: create the admin account for this PC.</p><label class="mini">Admin name<input id="an" class="fullinput" autocomplete="name"></label><label class="mini">Username<input id="au" class="fullinput" autocomplete="username"></label><label class="mini">Password (minimum 6 characters)<input id="ap" class="fullinput" type="password" autocomplete="new-password"></label><button class="primary" style="margin-top:12px" onclick="createAdminAccount()">Create Admin Account</button><div class="notice">This account is stored in the local SQLite database on this PC.</div>`)}
+async function loadAdminState(){const state=await backendRequest('/api/admin/state',{token:sessionStorage.getItem('mgr_admin_token')});products=state.products;CATS=state.cats;SUBS=state.subs;partners=state.partners;orders=state.orders;expenses=state.expenses;purchases=state.purchases||[];customers=state.customers;settings=state.settings||settings;localStorage.setItem('mgr_offline_settings',JSON.stringify(settings));}
+async function adminLogin(){try{const result=await backendRequest('/api/auth/login',{method:'POST',body:{username:document.getElementById('au').value,password:document.getElementById('ap').value,role:'admin'}});setAdminAuthed(result.token);await loadAdminState();showAdminShell();adminDashboard()}catch(error){alert(error.message)}}
+async function createAdminAccount(){try{const result=await backendRequest('/api/admin/setup',{method:'POST',body:{name:document.getElementById('an').value,username:document.getElementById('au').value,password:document.getElementById('ap').value}});setAdminAuthed(result.token);await loadAdminState();showAdminShell();adminDashboard()}catch(error){alert(error.message)}}
+function adminPassword(){openModal('<h2>🔑 Change Password</h2>'+adminTabs('Password')+'<input id="pw0" class="fullinput" type="password" placeholder="Current password" autocomplete="current-password"><input id="pw1" class="fullinput" type="password" placeholder="New password (min 6 characters)" style="margin-top:8px" autocomplete="new-password"><input id="pw2" class="fullinput" type="password" placeholder="Confirm new password" autocomplete="new-password"><button class="primary" style="margin-top:12px" onclick="saveAdminPassword()">Save Password</button><div class="notice">The password is securely stored by the local backend.</div>')}
+async function saveAdminPassword(){const currentPassword=document.getElementById('pw0').value,password=document.getElementById('pw1').value,confirm=document.getElementById('pw2').value;if(password.length<6)return alert('New password must contain at least 6 characters');if(password!==confirm)return alert('New password and confirmation do not match');try{await backendRequest('/api/admin/password',{method:'POST',token:sessionStorage.getItem('mgr_admin_token'),body:{currentPassword,password}});alert('Password changed');adminPassword()}catch(error){alert(error.message)}}
+async function adminLogout(){const token=sessionStorage.getItem('mgr_admin_token');try{if(token)await backendRequest('/api/auth/logout',{method:'POST',token})}catch(error){alert('Could not confirm backend logout: '+error.message)}setAdminAuthed(null);showAdminShell();openAdminLogin()}
+async function openAdminPanel(){if(!adminAuthed())return initializeAdmin();try{await loadAdminState();adminDashboard()}catch(error){alert(error.message)}}
+function showAdminShell(){const b=document.getElementById('shellBtn');if(b)b.textContent=adminAuthed()?'Open Admin Panel':'Admin Login'}
+async function refreshAdminAndOpen(view){try{await loadAdminState();window[view]()}catch(error){alert(error.message)}}
+function adminTabs(current){const tabs=[['Dashboard','adminDashboard'],['Products','adminProducts'],['Categories','adminCategories'],['Orders','adminOrders'],['Customers','adminCustomers'],['Partners','adminPartners'],['Expenses','adminExpenses'],['Reports','adminReports'],['Settings','openSettings'],['Sync','adminSync'],['Password','adminPassword']];return `<div class="tabs">${tabs.map(([label,fn])=>`<button class="tab ${label===current?'active':''}" onclick="refreshAdminAndOpen('${fn}')">${label}</button>`).join('')}<button class="tab" onclick="window.open('accounting.html','_blank')">Accounts App</button><button class="tab" onclick="adminLogout()">⏻ Logout</button></div>`}
+function adminSync(){openModal('<h2>🔄 Data Sync</h2>'+adminTabs('Sync')+syncPanelHTML('admin'))}
+
+async function initializeAdmin(){
+ try{
+  const status=await backendRequest('/api/setup-status');
+  if(!status.adminExists){openAdminSetup();return}
+  if(adminAuthed()){
+   try{const session=await backendRequest('/api/session',{token:sessionStorage.getItem('mgr_admin_token')});if(session.user.role==='admin'){await loadAdminState();showAdminShell();adminDashboard();return}}catch{}
+   setAdminAuthed(null);
+  }
+  openAdminLogin();
+ }catch(error){openModal(`<h2>Local backend is not running</h2><p>Start <b>START_LOCAL_BACKEND.bat</b> in the website folder, then open this page from the local server.</p><div class="notice">${error.message}</div>`)}
+}
+showAdminShell();initializeAdmin();
+</script>
+</body>
+</html>
